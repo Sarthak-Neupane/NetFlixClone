@@ -1,11 +1,10 @@
 <template>
-    <li>
-      <img :src="'https://image.tmdb.org/t/p/w185' + poster" />
-    </li>
+  <li>
+    <img :src="'https://image.tmdb.org/t/p/w185' + poster" />
+  </li>
 </template>
 
 <script>
-
 export default {
   data() {},
   props: ["poster"],
@@ -14,7 +13,7 @@ export default {
 
 <style scoped>
 li {
-  margin: .5rem;
+  margin: 0.5rem;
   max-width: 10rem;
 }
 </style>

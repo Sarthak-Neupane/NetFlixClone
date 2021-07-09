@@ -1,62 +1,79 @@
 <template>
-  <div>
-    <big-background
-      :background="
-        'https://image.tmdb.org/t/p/original' +
-        getMovies.backdropPhoto[randomNumber]
-      "
-      :title="getMovies.title[randomNumber]"
-      :desc="getMovies.description[randomNumber]"
-    >
+  <section class="movie">
+    <big-background :background="url" :title="title" :desc="des">
     </big-background>
-  </div>
+  </section>
 </template>
 
 <script>
 export default {
   data() {
-    return {};
+    return {
+      url: "../assets/casual.jpg",
+      title: "fakeflix",
+      des: "fake",
+    };
   },
-  computed: {
-    getMovies() {
-      const info = {
-        id: [],
-        title: [],
-        backdropPhoto: [],
-        description: [],
-        popularity: [],
-        posterPhoto: [],
-      };
-      this.$store.getters.getMovies.forEach((data) => {
-        data.results.forEach((element) => {
-          info.id.push(element.id);
-          info.title.push(element.title);
-          info.backdropPhoto.push(element.backdrop_path);
-          info.description.push(element.overview);
-          info.popularity.push(element.popularity);
-          info.posterPhoto.push(element.poster_path);
-        });
-      });
-      // console.log(
-      //   info.title,
-      //   info.backdropPhoto,
-      //   info.description,
-      //   info.popularity,
-      //   info.posterPhoto
-      // );
-      return info;
+
+  watch: {
+    url(newData) {
+      this.url = newData;
     },
-    randomNumber() {
-      return Math.floor(Math.random() * this.getMovies.backdropPhoto.length);
+    title(newData) {
+      this.title = newData;
+    },
+    des(newData) {
+      this.des = newData;
+    },
+  },
+
+  methods: {
+    setInfo() {
+      setTimeout(() => {
+        this.url =
+          "https://image.tmdb.org/t/p/original" +
+          this.$store.getters.getMoviesDiscover[0].backdrop_path;
+        this.title = this.$store.getters.getMoviesDiscover[0].title;
+        this.des = this.$store.getters.getMoviesDiscover[0].overview;
+        console.log(this.url, this.title, this.des);
+      }, 500);
+    },
+
+    getData() {
+      this.$store.dispatch("getMovies", {
+        discover:
+          "https://api.themoviedb.org/3/discover/movie?api_key=600356b3ea6a55171e5421f900b63ab9&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_watch_monetization_types=flatrate",
+        upcoming:
+          "https://api.themoviedb.org/3/movie/upcoming?api_key=600356b3ea6a55171e5421f900b63ab9&language=en-US&page=1",
+        popular:
+          "https://api.themoviedb.org/3/movie/popular?api_key=600356b3ea6a55171e5421f900b63ab9&language=en-US&page=1",
+        topRated:
+          "https://api.themoviedb.org/3/movie/top_rated?api_key=600356b3ea6a55171e5421f900b63ab9&language=en-US&page=1",
+        inTheatres:
+          "https://api.themoviedb.org/3/movie/now_playing?api_key=600356b3ea6a55171e5421f900b63ab9&language=en-US&page=1",
+        trending:
+          "https://api.themoviedb.org/3/trending/movie/week?api_key=600356b3ea6a55171e5421f900b63ab9",
+        type: "movie",
+      });
+      this.setInfo();
     },
   },
   created() {
-    this.$store.dispatch("getMovies", {
-      url1: "https://api.themoviedb.org/3/discover/movie?api_key=600356b3ea6a55171e5421f900b63ab9&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_watch_monetization_types=flatrate",
-      url2: "https://api.themoviedb.org/3/discover/movie?api_key=600356b3ea6a55171e5421f900b63ab9&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_watch_monetization_types=flatrate",
-      url3: "https://api.themoviedb.org/3/discover/movie?api_key=600356b3ea6a55171e5421f900b63ab9&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_watch_monetization_types=flatrate",
-      type: "movie",
-    });
+    this.getData();
+  },
+  // mounted() {
+  //   this.setInfo();
+  // },
+  computed: {
+    discover() {
+      return this.$store.getters.getMoviesDiscover;
+    },
+    upcoming() {
+      return this.$store.getters.getMoviesUpcoming;
+    },
+    OneMovie() {
+      return this.$store.getters.getOneMovie;
+    },
   },
 };
 </script>

@@ -5,7 +5,7 @@ import store from "./store";
 
 import BasePoster from "./components/Base/BasePoster.vue";
 import BaseButton from "./components/Base/BaseButton.vue";
-import BigBackground from "./components/bigBackground.vue";
+import BigBackground from "./components/Base/bigBackground.vue";
 
 const app = createApp(App);
 

@@ -2,14 +2,23 @@ import { createStore } from "vuex";
 
 export default createStore({
   state: {
-    movies: [],
+    movies: {
+      discover: [],
+      upcoming: [],
+      popularity: [],
+      topRated: [],
+      inTheatres: [],
+      trending: [],
+    },
     tv: [],
   },
   mutations: {
     storeMovies(state, payload) {
-      payload.forEach((data) => {
-        state.movies.push(data);
-      });
+      Object.entries(state.movies).forEach((value, index) =>
+        payload[index].results.forEach((data) => {
+          value[1].push(data);
+        })
+      );
     },
     storeTv(state, payload) {
       payload.forEach((data) => {
@@ -19,6 +28,12 @@ export default createStore({
   },
   actions: {
     async getMovies(context, payload) {
+      context.state.movies.discover = [];
+      context.state.movies.upcoming = [];
+      context.state.movies.popularity = [];
+      context.state.movies.topRated = [];
+      context.state.movies.inTheatres = [];
+      context.state.movies.trending = [];
       const options = {
         headers: {
           "content-type": "application/json;charset=utf-8",
@@ -28,9 +43,12 @@ export default createStore({
       };
 
       const results = await Promise.all([
-        fetch(payload.url1, options),
-        fetch(payload.url2, options),
-        fetch(payload.url3, options),
+        fetch(payload.discover, options),
+        fetch(payload.upcoming, options),
+        fetch(payload.popular, options),
+        fetch(payload.topRated, options),
+        fetch(payload.inTheatres, options),
+        fetch(payload.trending, options),
       ]);
 
       const dataPromises = results.map((res) => res.json());
@@ -45,11 +63,30 @@ export default createStore({
     },
   },
   getters: {
-    getMovies(state) {
-      return state.movies;
+    getMoviesDiscover(state) {
+      return state.movies.discover;
     },
-    getTvs(state) {
-      return state.tv;
+    getMoviesUpcoming(state) {
+      return state.movies.upcoming;
+    },
+    getMoviesPopularity(state) {
+      return state.movies.popularity;
+    },
+    getMoviesToprated(state) {
+      return state.movies.topRated;
+    },
+    getMoviesinTheatres(state) {
+      return state.movies.inTheatres;
+    },
+    getMoviesTrending(state) {
+      return state.movies.trending;
+    },
+    getOneMovie(state) {
+      if (state.movies.discover !== undefined) {
+        return state.movies.discover[0];
+      } else {
+        return "";
+      }
     },
   },
   modules: {},

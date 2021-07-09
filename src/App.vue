@@ -1,8 +1,6 @@
 <template>
-  <section>
-    <the-header></the-header>
-      <router-view></router-view>
-  </section>
+  <the-header></the-header>
+  <router-view></router-view>
 </template>
 
 <script>
@@ -12,14 +10,11 @@ export default {
   components: {
     TheHeader,
   },
-  data() {
-    return {};
-  },
 };
 </script>
 
 <style scoped>
-section {
+* {
   font-family: Arial, Helvetica, sans-serif;
 }
 </style>

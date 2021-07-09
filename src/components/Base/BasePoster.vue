@@ -1,17 +1,15 @@
 <template>
-  <section>
-    <div class="bg">
-      <slot name="background"> </slot>
+  <div class="bg">
+    <slot name="background"> </slot>
+  </div>
+  <div class="textarea">
+    <slot name="title"></slot>
+    <slot name="desription"></slot>
+    <div class="actions">
+      <base-button mode="play"> <slot name="playNow"> </slot> </base-button>
+      <base-button mode="info"> <slot name="info"> </slot> </base-button>
     </div>
-    <div class="textarea">
-      <slot name="title"></slot>
-      <slot name="desription"></slot>
-      <div class="actions">
-        <base-button mode="play"> <slot name="playNow"> </slot> </base-button>
-        <base-button mode="info"> <slot name="info"> </slot> </base-button>
-      </div>
-    </div>
-  </section>
+  </div>
 </template>
 
 <script>
@@ -19,13 +17,10 @@ export default {};
 </script>
 
 <style scoped>
-section {
-  position: relative;
-}
-
 .bg {
   width: 100%;
   height: 80vh;
+  position: relative;
 }
 
 .bg::after {
@@ -34,8 +29,7 @@ section {
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 100%;
-  /* background: red; */
+  height: 80vh;
   background-image: linear-gradient(
     to top,
     rgba(0, 0, 0, 1),

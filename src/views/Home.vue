@@ -1,6 +1,9 @@
 <template>
-  <div class="home">
-    <!-- <swiper
+  <section class="home">
+    <h2>Hove view</h2>
+  </section>
+
+  <!-- <swiper
       :slides-per-view="7"
       :space-between="0"
       navigation
@@ -10,9 +13,7 @@
         <movie-list :poster="image.poster_path"></movie-list>
       </swiper-slide>
     </swiper> -->
-  </div>
 </template>
-
 <script>
 // import MovieList from "../components/MovieList.vue";
 // import { Swiper, SwiperSlide } from "swiper/vue";
@@ -23,7 +24,7 @@
 export default {
   data() {
     return {
-      movie:[]
+      movie: [],
     };
   },
   components: {
@@ -37,12 +38,12 @@ export default {
     // },
   },
   created() {
-  //   this.$store.dispatch("getMovies", {
-  //     url1: 'https://api.themoviedb.org/3/movie/api_key=600356b3ea6a55171e5421f900b63ab9&language=en-US',
-  //     url2: 'https://api.themoviedb.org/3/movie/565?api_key=600356b3ea6a55171e5421f900b63ab9&language=en-US',
-  //     url3: 'https://api.themoviedb.org/3/movie/425?api_key=600356b3ea6a55171e5421f900b63ab9&language=en-US',
-  //     type: 'movie'
-  //   });
+    //   this.$store.dispatch("getMovies", {
+    //     url1: 'https://api.themoviedb.org/3/movie/api_key=600356b3ea6a55171e5421f900b63ab9&language=en-US',
+    //     url2: 'https://api.themoviedb.org/3/movie/565?api_key=600356b3ea6a55171e5421f900b63ab9&language=en-US',
+    //     url3: 'https://api.themoviedb.org/3/movie/425?api_key=600356b3ea6a55171e5421f900b63ab9&language=en-US',
+    //     type: 'movie'
+    //   });
   },
 };
 </script>
