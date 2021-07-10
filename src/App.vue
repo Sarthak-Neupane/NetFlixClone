@@ -1,11 +1,10 @@
 <template>
   <the-header></the-header>
-    <router-view></router-view>
+  <router-view></router-view>
 </template>
 
 <script>
 import TheHeader from "./components/TheHeader.vue";
-
 export default {
   components: {
     TheHeader,
@@ -17,5 +16,4 @@ export default {
 * {
   font-family: Arial, Helvetica, sans-serif;
 }
-
 </style>

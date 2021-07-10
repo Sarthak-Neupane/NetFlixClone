@@ -1,11 +1,7 @@
 <template>
   <li>
     <router-link :to="getPath">
-      <img
-        :src="'https://image.tmdb.org/t/p/w300' + poster"
-        width="235"
-        class="posterImg"
-      />
+      <img :src="getImages" width="235" class="posterImg" />
     </router-link>
     <div class="actions">
       <svg
@@ -103,6 +99,13 @@ export default {
     getPath() {
       return this.$route.path + "/" + this.id;
     },
+    getImages() {
+      if (this.poster !== null) {
+        return "https://image.tmdb.org/t/p/w300" + this.poster;
+      } else {
+        return "../assets/netflix.jpg";
+      }
+    },
   },
   created() {
     this.getGenres();
@@ -110,13 +113,15 @@ export default {
   methods: {
     getGenres() {
       const displayGenre = [];
-      this.genres.forEach((value) => {
-        this.allGenre[0].forEach((item) => {
-          if (item.id === value) {
-            displayGenre.push(item.name);
-          }
+      if (this.genres !== []) {
+        this.genres.forEach((value) => {
+          this.allGenre.forEach((item) => {
+            if (item.id === value) {
+              displayGenre.push(item.name);
+            }
+          });
         });
-      });
+      }
       this.DisplayGenre = displayGenre;
     },
   },
@@ -150,11 +155,6 @@ li {
   padding: 0.5rem;
 }
 
-/* li:hover {
-  transform: scale(1.4);
-  z-index: 99999;
-} */
-
 li:hover .textArea {
   opacity: 1;
   bottom: 0%;
@@ -167,9 +167,9 @@ li:hover .actions {
 }
 .actions {
   position: absolute;
-  top: 70%;
+  top: 90%;
   left: 40%;
-  transform: translate(-50%, -70%);
+  transform: translate(-50%, -90%);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -186,6 +186,7 @@ li:hover .actions {
 .posterImg {
   object-fit: cover;
   border-radius: 5px;
+  height: 100%;
 }
 
 .text {

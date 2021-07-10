@@ -10,7 +10,12 @@ export default createStore({
       inTheatres: [],
       trending: [],
     },
-    tv: [],
+    tv: {
+      airingToday: [],
+      onTheAir: [],
+      popular: [],
+      topRated: [],
+    },
   },
   mutations: {
     storeMovies(state, payload) {
@@ -21,9 +26,11 @@ export default createStore({
       );
     },
     storeTv(state, payload) {
-      payload.forEach((data) => {
-        state.tv.push(data);
-      });
+      Object.entries(state.tv).forEach((value, index) =>
+        payload[index].results.forEach((data) => {
+          value[1].push(data);
+        })
+      );
     },
   },
   actions: {
@@ -55,11 +62,33 @@ export default createStore({
 
       const data = await Promise.all(dataPromises);
 
-      if (payload.type === "tv") {
-        context.commit("storeTv", data);
-      } else if (payload.type === "movie") {
-        context.commit("storeMovies", data);
-      }
+      context.commit("storeMovies", data);
+    },
+    async getTV(context, payload) {
+      context.state.tv.onTheAir = [];
+      context.state.tv.airingToday = [];
+      context.state.tv.popular = [];
+      context.state.tv.topRated = [];
+      const options = {
+        headers: {
+          "content-type": "application/json;charset=utf-8",
+          authorization:
+            "Bearer <<eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2MDAzNTZiM2VhNmE1NTE3MWU1NDIxZjkwMGI2M2FiOSIsInN1YiI6IjYwZTNjNTQ5YjNmNmY1MDAyYzQ2OGJkYiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.sr0GDGc-LG43wFiR3NQXMWLR1DjbmlBHSLSrvtWkUEM>>",
+        },
+      };
+
+      const results = await Promise.all([
+        fetch(payload.airingToday, options),
+        fetch(payload.onTheAir, options),
+        fetch(payload.popular, options),
+        fetch(payload.topRated, options),
+      ]);
+
+      const dataPromises = results.map((res) => res.json());
+
+      const data = await Promise.all(dataPromises);
+
+      context.commit("storeTv", data);
     },
   },
   getters: {
@@ -102,6 +131,29 @@ export default createStore({
         datas: state.movies.trending,
       };
     },
+    getTvAiringToday(state) {
+      return {
+        name: "Airing Today",
+        datas: state.tv.airingToday,
+      };
+    },
+    getTvAiring(state) {
+      return {
+        name: "On The Air",
+        datas: state.tv.onTheAir,
+      };
+    },
+    getTvPopular(state) {
+      return {
+        name: "Popular on ChillFlix",
+        datas: state.tv.popular,
+      };
+    },
+    getTvTopRated(state) {
+      return {
+        name: "Top Rated",
+        datas: state.tv.topRated,
+      };
+    },
   },
-  modules: {},
 });

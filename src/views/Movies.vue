@@ -114,7 +114,7 @@ export default {
       } else if (window.innerWidth < 1450) {
         return 4;
       } else if (window.innerWidth < 1900) {
-        return 6;
+        return 5;
       } else {
         return 8;
       }
@@ -160,7 +160,7 @@ export default {
 .container {
   padding: 0rem 1rem;
 }
-.swiper-slide:hover li{
-  transform: scale(1.24)
+.swiper-slide:hover li {
+  transform: scale(1.24);
 }
 </style>

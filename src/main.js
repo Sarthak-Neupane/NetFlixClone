@@ -9,7 +9,7 @@ import BigBackground from "./components/Base/bigBackground.vue";
 import BaseSpinner from "./components/Base/BaseSpinner.vue";
 import BaseSwiper from "./components/Base/BaseSwiper.vue";
 
-const app = createApp(App);
+const app = createApp(App).use(router);
 
 app.component("base-poster", BasePoster);
 app.component("base-button", BaseButton);
