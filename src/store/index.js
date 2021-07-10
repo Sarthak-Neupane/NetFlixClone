@@ -64,29 +64,43 @@ export default createStore({
   },
   getters: {
     getMoviesDiscover(state) {
-      return state.movies.discover;
+      // return state.movies.discover;
+      return { name: "Discover", datas: state.movies.discover };
     },
     getMoviesUpcoming(state) {
-      return state.movies.upcoming;
+      // return state.movies.upcoming;
+      return {
+        name: "Upcoming",
+        datas: state.movies.upcoming,
+      };
     },
     getMoviesPopularity(state) {
-      return state.movies.popularity;
+      // return state.movies.popularity;
+      return {
+        name: "Popular",
+        datas: state.movies.popularity,
+      };
     },
     getMoviesToprated(state) {
-      return state.movies.topRated;
+      // return state.movies.topRated;
+      return {
+        name: "Top Rated",
+        datas: state.movies.topRated,
+      };
     },
     getMoviesinTheatres(state) {
-      return state.movies.inTheatres;
+      // return state.movies.inTheatres;
+      return {
+        name: "In Theatres",
+        datas: state.movies.inTheatres,
+      };
     },
     getMoviesTrending(state) {
-      return state.movies.trending;
-    },
-    getOneMovie(state) {
-      if (state.movies.discover !== undefined) {
-        return state.movies.discover[0];
-      } else {
-        return "";
-      }
+      // return state.movies.trending;
+      return {
+        name: "Trending",
+        datas: state.movies.trending,
+      };
     },
   },
   modules: {},
