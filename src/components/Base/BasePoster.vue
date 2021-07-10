@@ -19,7 +19,7 @@ export default {};
 <style scoped>
 .bg {
   width: 100%;
-  height: 80vh;
+  height: 90vh;
   position: relative;
 }
 
@@ -29,7 +29,7 @@ export default {};
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 80vh;
+  height: 50%;
   background-image: linear-gradient(
     to top,
     rgba(0, 0, 0, 1),

@@ -68,7 +68,7 @@ section {
   justify-content: space-between;
   align-items: center;
   padding: 1rem 3rem;
-  position: absolute;
+  position: fixed;
   z-index: 999;
   top: 0;
   background-image: linear-gradient(
