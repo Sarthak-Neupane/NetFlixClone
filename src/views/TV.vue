@@ -143,8 +143,16 @@ export default {
 }
 .container {
   padding: 0rem 1rem;
+  margin: 2rem 0;
 }
 .swiper-slide:hover li {
   transform: scale(1.24);
+}
+
+
+@media(max-width: 768px){
+  .container{
+    margin: 0rem 0;
+  }
 }
 </style>

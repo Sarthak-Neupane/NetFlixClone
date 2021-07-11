@@ -4,6 +4,7 @@ import MOVIES from "../views/Movies.vue";
 import MoviesDetail from "../views/MovieDetails.vue";
 import TvDetails from "../views/TvDetails.vue";
 import TV from "../views/TV.vue";
+import Search from "../views/Search.vue";
 import MYLIST from "../views/MyList.vue";
 
 const routes = [
@@ -37,6 +38,11 @@ const routes = [
     name: "tvId",
     component: TvDetails,
     props: true,
+  },
+  {
+    path: "/search",
+    name: "search",
+    component: Search,
   },
   {
     path: "/myList",

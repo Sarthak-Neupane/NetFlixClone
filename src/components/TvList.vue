@@ -1,46 +1,10 @@
 <template>
   <li>
-    <router-link :to="getPath">
-      <img :src="getImages" width="235" class="posterImg" />
-    </router-link>
-    <div class="actions">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        x="0px"
-        y="0px"
-        width="30"
-        height="30"
-        viewBox="0 0 172 172"
-        style="fill: #000000"
-        class="svgInfo"
-      >
-        <g
-          fill="none"
-          fill-rule="nonzero"
-          stroke="none"
-          stroke-width="1"
-          stroke-linecap="butt"
-          stroke-linejoin="miter"
-          stroke-miterlimit="10"
-          stroke-dasharray=""
-          stroke-dashoffset="0"
-          font-family="none"
-          font-weight="none"
-          font-size="none"
-          text-anchor="none"
-          style="mix-blend-mode: normal"
-        >
-          <path d="M0,172v-172h172v172z" fill="none"></path>
-          <path
-            d="M86,159.96c-40.84698,0 -73.96,-33.11302 -73.96,-73.96v0c0,-40.84698 33.11302,-73.96 73.96,-73.96h0c40.84698,0 73.96,33.11302 73.96,73.96v0c0,40.84698 -33.11302,73.96 -73.96,73.96z"
-            fill="#ffffff"
-          ></path>
-          <g fill="#000000">
-            <path d="M55.76415,43.19531v85.59593l72.75358,-42.79373z"></path>
-          </g>
-        </g>
-      </svg>
+    <div class="containerli">
       <router-link :to="getPath">
+        <img :src="getImages" width="235" class="posterImg" />
+      </router-link>
+      <div class="actions">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           x="0px"
@@ -49,6 +13,7 @@
           height="30"
           viewBox="0 0 172 172"
           style="fill: #000000"
+          class="svgInfo"
         >
           <g
             fill="none"
@@ -67,17 +32,52 @@
             style="mix-blend-mode: normal"
           >
             <path d="M0,172v-172h172v172z" fill="none"></path>
-            <g fill="#ffffff">
-              <path
-                d="M86,6.88c-43.69832,0 -79.12,35.42168 -79.12,79.12c0,43.69832 35.42168,79.12 79.12,79.12c43.69832,0 79.12,-35.42168 79.12,-79.12c0,-43.69832 -35.42168,-79.12 -79.12,-79.12zM86,37.84c5.70008,0 10.32,4.61992 10.32,10.32c0,5.70008 -4.61992,10.32 -10.32,10.32c-5.70008,0 -10.32,-4.61992 -10.32,-10.32c0,-5.70008 4.61992,-10.32 10.32,-10.32zM99.76,130.72h-6.88h-13.76h-6.88v-6.88h6.88v-44.72h-6.88v-6.88h6.88h13.76v6.88v44.72h6.88z"
-              ></path>
+            <path
+              d="M86,159.96c-40.84698,0 -73.96,-33.11302 -73.96,-73.96v0c0,-40.84698 33.11302,-73.96 73.96,-73.96h0c40.84698,0 73.96,33.11302 73.96,73.96v0c0,40.84698 -33.11302,73.96 -73.96,73.96z"
+              fill="#ffffff"
+            ></path>
+            <g fill="#000000">
+              <path d="M55.76415,43.19531v85.59593l72.75358,-42.79373z"></path>
             </g>
           </g>
         </svg>
-      </router-link>
-    </div>
-    <div class="textArea">
-      <div class="text">
+        <router-link :to="getPath">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            x="0px"
+            y="0px"
+            width="30"
+            height="30"
+            viewBox="0 0 172 172"
+            style="fill: #000000"
+          >
+            <g
+              fill="none"
+              fill-rule="nonzero"
+              stroke="none"
+              stroke-width="1"
+              stroke-linecap="butt"
+              stroke-linejoin="miter"
+              stroke-miterlimit="10"
+              stroke-dasharray=""
+              stroke-dashoffset="0"
+              font-family="none"
+              font-weight="none"
+              font-size="none"
+              text-anchor="none"
+              style="mix-blend-mode: normal"
+            >
+              <path d="M0,172v-172h172v172z" fill="none"></path>
+              <g fill="#ffffff">
+                <path
+                  d="M86,6.88c-43.69832,0 -79.12,35.42168 -79.12,79.12c0,43.69832 35.42168,79.12 79.12,79.12c43.69832,0 79.12,-35.42168 79.12,-79.12c0,-43.69832 -35.42168,-79.12 -79.12,-79.12zM86,37.84c5.70008,0 10.32,4.61992 10.32,10.32c0,5.70008 -4.61992,10.32 -10.32,10.32c-5.70008,0 -10.32,-4.61992 -10.32,-10.32c0,-5.70008 4.61992,-10.32 10.32,-10.32zM99.76,130.72h-6.88h-13.76h-6.88v-6.88h6.88v-44.72h-6.88v-6.88h6.88h13.76v6.88v44.72h6.88z"
+                ></path>
+              </g>
+            </g>
+          </svg>
+        </router-link>
+      </div>
+      <div class="textArea">
         <h1>{{ name }}</h1>
         <ul class="genres">
           <li v-for="genre in DisplayGenre" :key="genre">{{ genre }}</li>
@@ -103,7 +103,7 @@ export default {
       if (this.poster !== null) {
         return "https://image.tmdb.org/t/p/w300" + this.poster;
       } else {
-        return "../assets/netflix.jpg";
+        return "../assets/netFlixfake.jpg";
       }
     },
   },
@@ -131,9 +131,7 @@ export default {
 <style scoped>
 li {
   transition: transform 0.3s ease-in;
-  position: relative;
   text-decoration: none;
-  /* margin: 0rem 1rem; */
 }
 
 .textArea {
@@ -141,11 +139,11 @@ li {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  justify-content: flex-end;
+  justify-content: center;
   position: absolute;
   bottom: -10%;
   left: 0%;
-  transform: translate(-10%, 0%);
+  transform: translate(0%, 0%);
   z-index: 999;
   opacity: 0;
   transition: all 1s ease;
@@ -159,7 +157,7 @@ li:hover .textArea {
   opacity: 1;
   bottom: 0%;
   left: 0%;
-  transform: translate(-10%, 0%);
+  transform: translate(0%, 0%);
 }
 
 li:hover .actions {
@@ -167,9 +165,9 @@ li:hover .actions {
 }
 .actions {
   position: absolute;
-  top: 90%;
-  left: 40%;
-  transform: translate(-50%, -90%);
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, -70%);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -178,30 +176,18 @@ li:hover .actions {
   opacity: 0;
   transition: all 1s ease;
 }
-
-.svgInfo:hover {
-  fill: #808080;
-}
-
 .posterImg {
   object-fit: cover;
-  border-radius: 5px;
   height: 100%;
-}
-
-.text {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-direction: column;
+  width: 100%;
+  border-radius: 5px;
 }
 
 h1 {
   font-size: 1rem;
-  max-width: 100%;
   font-weight: 500;
   color: whitesmoke;
-  text-align: left;
+  text-align: center;
 }
 
 .genres {
@@ -217,5 +203,48 @@ h1 {
   text-align: left;
   font-size: 0.6rem;
   max-width: 80%;
+}
+
+.containerli {
+  padding: 0;
+  margin: 2rem;
+  height: 100%;
+  transition: transform 1s ease;
+}
+
+@media (max-width: 768px) {
+  .textArea {
+    position: absolute;
+    bottom: -30%;
+    left: 0%;
+    transform: translate(0%, -30%);
+    opacity: 1;
+    background: none;
+  }
+  .posterImg {
+    object-fit: cover;
+    height: 80%;
+    width: 80%;
+    border-radius: 5px;
+    margin-left: 10%;
+  }
+  .containerli {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .actions {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%, -100%);
+    opacity: 1;
+  }
+  li:hover .textArea {
+    opacity: 1;
+  }
+  li:hover .actions {
+    opacity: 1;
+  }
 }
 </style>

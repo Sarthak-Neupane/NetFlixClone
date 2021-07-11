@@ -107,10 +107,10 @@ export default {
   },
   computed: {
     dimensions() {
-      if (window.innerWidth < 400) {
+      if (window.innerWidth < 500) {
         return 1;
       } else if (window.innerWidth < 768) {
-        return 2;
+        return 1;
       } else if (window.innerWidth < 1450) {
         return 4;
       } else if (window.innerWidth < 1900) {
@@ -162,5 +162,11 @@ export default {
 }
 .swiper-slide:hover li {
   transform: scale(1.24);
+}
+
+@media (max-width: 768px) {
+  .container {
+    margin: 0rem 0;
+  }
 }
 </style>
