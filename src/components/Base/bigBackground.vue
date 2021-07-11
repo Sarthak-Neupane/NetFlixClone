@@ -1,5 +1,5 @@
 <template>
-  <base-poster>
+  <base-background>
     <template #background>
       <img :src="background" />
     </template>
@@ -12,7 +12,7 @@
 
     <template #playNow> Play </template>
     <template #info> Info </template>
-  </base-poster>
+  </base-background>
 </template>
 
 <script>
