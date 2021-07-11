@@ -23,6 +23,7 @@
         :key="item.id"
         :image="'https://image.tmdb.org/t/p/w300' + item.backdrop_path"
         :id="item.id"
+        :type="item.media_type"
       ></search-list>
     </div>
   </section>
@@ -149,6 +150,8 @@ form {
 .display {
   /* background: yellow; */
   display: flex;
+  justify-content: center;
+  align-items: center;
   flex-wrap: wrap;
   max-width: 90%;
 }

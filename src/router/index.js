@@ -18,12 +18,12 @@ const routes = [
     component: HOME,
   },
   {
-    path: "/movies",
+    path: "/movie",
     name: "movies",
     component: MOVIES,
   },
   {
-    path: "/movies/:id",
+    path: "/movie/:id",
     name: "moviesId",
     component: MoviesDetail,
     props: true,
