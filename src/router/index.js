@@ -6,6 +6,7 @@ import TvDetails from "../views/TvDetails.vue";
 import TV from "../views/TV.vue";
 import Search from "../views/Search.vue";
 import MYLIST from "../views/MyList.vue";
+import Video from "../views/Video.vue";
 
 const routes = [
   {
@@ -49,6 +50,11 @@ const routes = [
     name: "mylist",
     component: MYLIST,
   },
+  {
+    path: "/video",
+    name: "video",
+    component: Video,
+  }
 ];
 
 const router = createRouter({

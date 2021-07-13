@@ -16,13 +16,16 @@
     </div>
     <slot name="desription"></slot>
     <div class="actions">
-      <base-button
-        @mouseover="$emit('change-color', 'true')"
-        @mouseleave="$emit('change-color', 'false')"
-        mode="info"
-      >
-        <slot name="playNow"> </slot>
-      </base-button>
+      <router-link to="/video">
+        <base-button
+          @mouseover="$emit('change-color', 'true')"
+          @mouseleave="$emit('change-color', 'false')"
+          mode="info"
+        >
+          <slot name="playNow"> </slot>
+        </base-button>
+      </router-link>
+
       <base-button
         @mouseover="$emit('change-color', 'true')"
         @mouseleave="$emit('change-color', 'false')"
@@ -95,5 +98,9 @@ export default {
 
 .forTv {
   margin: 1.5rem 0rem;
+}
+
+a{
+  text-decoration: none;
 }
 </style>
