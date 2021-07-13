@@ -47,8 +47,8 @@ export default {
 
       this.isLoading = false;
 
-      console.log(this.data);
-      console.log(this.genreName);
+      // console.log(this.data);
+      // console.log(this.genreName);
     },
 
     // async getSimilar() {

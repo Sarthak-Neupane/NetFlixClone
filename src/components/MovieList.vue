@@ -65,6 +65,7 @@
             <button
               @mouseover="changeColorInfo('true')"
               @mouseleave="changeColorInfo('false')"
+              @click="updateList"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -115,6 +116,7 @@ export default {
       DisplayGenre: null,
       colorPlay: "#ffffff",
       colorInfo: "#ffffff",
+      error: false
     };
   },
   props: ["poster", "id", "name", "genres", "allGenre"],
@@ -137,26 +139,41 @@ export default {
         });
       });
       this.DisplayGenre = displayGenre;
-      console.log(this.DisplayGenre);
+      // console.log(this.DisplayGenre);
     },
     changeColorPlay(value) {
       console.log(value);
       if (value === "true") {
         this.colorPlay = "#000000";
-        console.log(this.color);
+        // console.log(this.color);
       } else {
         this.colorPlay = "#ffffff";
       }
     },
     changeColorInfo(value) {
-      console.log(value);
+      // console.log(value);
       if (value === "true") {
         this.colorInfo = "#000000";
-        console.log(this.color);
+        // console.log(this.color);
       } else {
         this.colorInfo = "#ffffff";
       }
     },
+    updateList(){
+      try {
+        this.$store.dispatch('storeList', {
+          title: this.name,
+          poster: this.poster,
+          id: this.id,
+          // genre: this.DisplayGenre[0],
+          // mediaType: 'movie'
+        })
+      } catch (error) {
+        console.log(error.msg)
+        this.error = true
+        this.errorMessage = error.msg
+      }
+    }
   },
 };
 </script>

@@ -125,10 +125,10 @@ export default {
   },
   methods: {
     changeColor(value) {
-      console.log(value);
+      // console.log(value);
       if (value === "true") {
         this.color = "#000000";
-        console.log(this.color);
+        // console.log(this.color);
       } else {
         this.color = "#ffffff";
       }

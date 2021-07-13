@@ -55,11 +55,22 @@
         </div>
       </router-link>
       <div class="action">
-        <router-link to="/home">Login</router-link>
+        <button @click="logout">LogOut</button>
       </div>
     </div>
   </section>
 </template>
+
+<script>
+export default {
+  methods: {
+    async logout() {
+      await this.$store.dispatch("logOut");
+      this.$router.push("/login");
+    },
+  },
+};
+</script>
 
 <style scoped>
 section {
@@ -117,5 +128,9 @@ a:hover {
 
 .search {
   cursor: text;
+}
+
+.action .button {
+  padding: 0.3rem;
 }
 </style>

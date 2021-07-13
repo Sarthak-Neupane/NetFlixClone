@@ -1,0 +1,329 @@
+<template>
+  <!-- <section>
+    <div class="error" v-if="error">{{ error.message }}</div>
+    <form @submit.prevent="pressed">
+      <h1>Sign Up to Netflix</h1>
+      <div class="firstName">
+        <input type="text" v-model="firstName" placeholder="firstname" />
+      </div>
+      <div class="lastName">
+        <input type="text" v-model="lastName" placeholder="lastname" />
+      </div>
+      <div class="email">
+        <input type="email" v-model="email" placeholder="email" />
+      </div>
+      <div class="password">
+        <input type="password" v-model="password" placeholder="password" />
+      </div>
+      <button type="submit">Sign Up</button>
+      <p>Already a user? <router-link to="/login"> Login </router-link></p>
+    </form>
+  </section> -->
+
+  <section>
+    <div class="container">
+      <div class="form-contain">
+        <div class="header">
+          <!-- <img src="../assets/netflix.jpg" /> -->
+        </div>
+
+        <div class="title">Welcome</div>
+
+        <form @submit.prevent="pressed">
+          <div class="input1 inputs">
+            <input
+              type="text"
+              id="Fname"
+              name="Fname"
+              class="input"
+              autocomplete="false"
+              v-model="firstName"
+              @click="labelUpFirstname()"
+              ref="firstName"
+            />
+            <label for="Fname" class="hello">First Name</label>
+          </div>
+
+          <div class="input1 inputs">
+            <input
+              type="text"
+              id="Lname"
+              name="Lname"
+              class="input"
+              autocomplete="false"
+              v-model="lastName"
+              @click="labelUpLastname()"
+              ref="lastName"
+            />
+            <label for="Lname" class="hello">Last Name</label>
+          </div>
+
+          <div class="input1 inputs">
+            <input
+              type="email"
+              id="email"
+              name="email"
+              class="input"
+              autocomplete="off"
+              v-model="email"
+              @click="labelUpemail()"
+              ref="email"
+            />
+            <label for="email" class="hello">Email</label>
+          </div>
+
+          <div class="input2 inputs">
+            <input
+              type="password"
+              id="password"
+              name="password"
+              class="input"
+              v-model="password"
+              @click="labelUppassword()"
+              ref="password"
+            />
+            <label for="password" class="hello">Password</label>
+          </div>
+
+          <input type="submit" class="submit" value="Sign Up" />
+          <p>
+            Already have an account?
+            <router-link to="/login">Login</router-link>
+          </p>
+        </form>
+      </div>
+    </div>
+  </section>
+</template>
+
+<script>
+// import firebase from "firebase/app";
+// import "firebase/auth";
+export default {
+  data() {
+    return {
+      email: "",
+      password: "",
+      error: "",
+      firstName: "",
+      lastName: "",
+      loading: ""
+    };
+  },
+  methods: {
+    async pressed() {
+      this.loading = true;
+      await this.$store.dispatch("signup", {
+        firstName: this.firstName,
+        lastName: this.lastName,
+        email: this.email,
+        password: this.password,
+      });
+      this.loading = false;
+      if (this.loading) {
+        this.$router.replace({ name: "login" });
+      }
+    },
+    labelUpFirstname() {
+      this.$refs.firstName.nextElementSibling.classList.add("active");
+    },
+    labelUpLastname() {
+      this.$refs.lastName.nextElementSibling.classList.add("active");
+    },
+    labelUpemail() {
+      this.$refs.email.nextElementSibling.classList.add("active");
+    },
+    labelUppassword() {
+      this.$refs.password.nextElementSibling.classList.add("active");
+    },
+  },
+};
+</script>
+
+<style scoped>
+.error {
+  color: red;
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%, -10%);
+  font-size: 18px;
+}
+section {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url("../assets/netflixBackground.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+* {
+  color: white;
+}
+
+.container {
+  width: 40vw;
+  height: 80vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  border-radius: 20px;
+  background-color: black;
+  -webkit-box-shadow: 1px 1px 20px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 1px 1px 20px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.container .form-contain {
+  width: 100%;
+  height: 100%;
+  padding: 0.9rem;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  display: -ms-grid;
+  display: grid;
+  place-items: center;
+}
+
+.container .form-contain .header {
+  width: 100%;
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  background-image: url("../assets/netflixLogo.png");
+  background-size: 50%;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+}
+
+.container .form-contain .header h1 {
+  margin: 0.5rem;
+}
+
+.container .form-contain form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 80%;
+}
+
+.container .form-contain form .input1,
+.container .form-contain form .input2 {
+  width: 100%;
+  position: relative;
+}
+
+.container .form-contain form .input1 label,
+.container .form-contain form .input2 label {
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translate(-20%, -50%);
+  transform: translate(-20%, -50%);
+  left: 20%;
+  font-size: 15px;
+  -webkit-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
+  cursor: text;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+
+.container .form-contain form .input1 label.active,
+.container .form-contain form .input2 label.active {
+  font-size: 10px;
+  top: 0%;
+  left: 15%;
+  opacity: 0.5;
+}
+
+.container .form-contain form input {
+  padding: 5px 10px;
+  width: 80%;
+  margin: 0.8rem 0;
+  outline: none;
+  border: none;
+  text-align: left;
+  background: none;
+  border-left: 5px solid #ff1313;
+}
+
+.container .form-contain form .submit {
+  margin-bottom: 1.3rem;
+  border: none;
+  height: 30px;
+  background-color: #ff1313;
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  border-radius: 15px;
+  /* padding: 0.5rem; */
+  text-align: center;
+  border: 1px solid red;
+  cursor: pointer;
+  -webkit-transition: all 0.3s linear;
+  transition: all 0.3s linear;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.container .form-contain form .submit:hover {
+  border: 1px solid red;
+  background: none;
+  color: white;
+}
+
+.container .form-contain form p {
+  width: 120%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.container .form-contain form p a {
+  text-decoration: none;
+  color: red;
+  padding: 0.4rem;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+.title {
+  font-size: 2.4rem;
+}
+</style>

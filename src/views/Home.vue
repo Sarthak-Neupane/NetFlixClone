@@ -1,7 +1,5 @@
 <template>
-  <section class="home">
-    <h2>Hove view</h2>
-  </section>
+  <section class="home">hello</section>
 
   <!-- <swiper
       :slides-per-view="7"
@@ -32,17 +30,12 @@ export default {
     // SwiperSlide,
   },
   computed: {
-    // getMovies() {
-    //   return this.$store.getters.getMovies;
-    // },
+    getUser() {
+      return this.$store.getters.getUser;
+    },
   },
   created() {
-    //   this.$store.dispatch("getMovies", {
-    //     url1: 'https://api.themoviedb.org/3/movie/api_key=600356b3ea6a55171e5421f900b63ab9&language=en-US',
-    //     url2: 'https://api.themoviedb.org/3/movie/565?api_key=600356b3ea6a55171e5421f900b63ab9&language=en-US',
-    //     url3: 'https://api.themoviedb.org/3/movie/425?api_key=600356b3ea6a55171e5421f900b63ab9&language=en-US',
-    //     type: 'movie'
-    //   });
+    
   },
 };
 </script>
