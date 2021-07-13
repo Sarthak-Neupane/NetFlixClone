@@ -1,7 +1,7 @@
 <template>
   <div class="head">
     <p><slot name="title"></slot></p>
-    <div><slot name="swiper"></slot></div>
+    <slot name="swiper"></slot>
   </div>
 </template>
 
@@ -9,10 +9,10 @@
 
 <style scoped>
 .head {
-  margin: 4rem 0rem;
+  margin: 1rem 0rem;
 }
 p {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   margin: 1.4rem 0;
 }
 

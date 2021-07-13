@@ -15,6 +15,7 @@ export default createStore({
       onTheAir: [],
       popular: [],
       topRated: [],
+      originals: [],
     },
   },
   mutations: {
@@ -69,6 +70,7 @@ export default createStore({
       context.state.tv.airingToday = [];
       context.state.tv.popular = [];
       context.state.tv.topRated = [];
+      context.state.tv.originals = [];
       const options = {
         headers: {
           "content-type": "application/json;charset=utf-8",
@@ -82,6 +84,7 @@ export default createStore({
         fetch(payload.onTheAir, options),
         fetch(payload.popular, options),
         fetch(payload.topRated, options),
+        fetch(payload.originals, options),
       ]);
 
       const dataPromises = results.map((res) => res.json());
@@ -153,6 +156,12 @@ export default createStore({
       return {
         name: "Top Rated",
         datas: state.tv.topRated,
+      };
+    },
+    getTvOriginal(state) {
+      return {
+        name: "ChillFlix Orginals",
+        datas: state.tv.originals,
       };
     },
   },

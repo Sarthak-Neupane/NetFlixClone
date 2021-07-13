@@ -3,9 +3,13 @@
     <div class="spinner" v-if="isLoading"><base-spinner></base-spinner></div>
     <big-background
       v-if="hasTv"
-      :background="'https://image.tmdb.org/t/p/original'+popular.datas[getRandom].backdrop_path"
+      :background="
+        'https://image.tmdb.org/t/p/original' +
+        popular.datas[getRandom].backdrop_path
+      "
       :title="popular.datas[getRandom].name"
       :desc="popular.datas[getRandom].overview"
+      :id="popular.datas[getRandom].id"
     >
     </big-background>
     <div class="container">
@@ -65,6 +69,7 @@ export default {
           "https://api.themoviedb.org/3/tv/popular?api_key=600356b3ea6a55171e5421f900b63ab9&language=en-US&page=1",
         topRated:
           "https://api.themoviedb.org/3/tv/top_rated?api_key=600356b3ea6a55171e5421f900b63ab9&language=en-US&page=1",
+        originals: `https://api.themoviedb.org/3/discover/tv?api_key=600356b3ea6a55171e5421f900b63ab9&with_networks=213&sort_by=popularity.desc&language=en_US`,
       });
       this.isLoading = false;
       this.storingDatas();
@@ -74,6 +79,7 @@ export default {
       this.Datas.push(this.onTheAir);
       this.Datas.push(this.popular);
       this.Datas.push(this.topRated);
+      this.Datas.unshift(this.originals);
       // console.log(this.Datas);
     },
     async getGenres() {
@@ -98,15 +104,15 @@ export default {
   computed: {
     dimensions() {
       if (window.innerWidth < 400) {
-        return 1;
-      } else if (window.innerWidth < 768) {
         return 2;
+      } else if (window.innerWidth < 768) {
+        return 3;
       } else if (window.innerWidth < 1450) {
         return 4;
       } else if (window.innerWidth < 1900) {
-        return 5;
-      } else {
         return 8;
+      } else {
+        return 10;
       }
     },
     airingToday() {
@@ -120,6 +126,9 @@ export default {
     },
     topRated() {
       return this.$store.getters.getTvTopRated;
+    },
+    originals() {
+      return this.$store.getters.getTvOriginal;
     },
     hasTv() {
       return !this.isLoading && this.$store.getters.getTvPopular.datas;
@@ -145,13 +154,9 @@ export default {
   padding: 0rem 1rem;
   margin: 2rem 0;
 }
-.swiper-slide:hover li {
-  transform: scale(1.24);
-}
 
-
-@media(max-width: 768px){
-  .container{
+@media (max-width: 768px) {
+  .container {
     margin: 0rem 0;
   }
 }

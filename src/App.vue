@@ -13,7 +13,5 @@ export default {
 </script>
 
 <style scoped>
-* {
-  font-family: Arial, Helvetica, sans-serif;
-}
+
 </style>

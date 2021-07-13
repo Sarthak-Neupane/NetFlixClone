@@ -9,6 +9,7 @@
       "
       :title="discover.datas[getRandom].title"
       :desc="discover.datas[getRandom].overview"
+      :id="discover.datas[getRandom].id"
     >
     </big-background>
     <div class="container">
@@ -17,10 +18,14 @@
         <template #swiper>
           <swiper
             :slides-per-view="dimensions"
+            :space-between="10"
             navigation
             :scrollbar="{ draggable: true }"
           >
-            <swiper-slide v-for="movie in items.datas" :key="movie">
+            <swiper-slide
+              v-for="movie in items.datas"
+              :key="movie"
+            >
               <movie-list
                 :poster="movie.poster_path"
                 :id="movie.id"
@@ -48,6 +53,7 @@ export default {
       isLoading: false,
       Datas: [],
       Genres: [],
+      hover: false,
     };
   },
   components: {
@@ -108,15 +114,15 @@ export default {
   computed: {
     dimensions() {
       if (window.innerWidth < 500) {
-        return 1;
+        return 2;
       } else if (window.innerWidth < 768) {
-        return 1;
-      } else if (window.innerWidth < 1450) {
         return 4;
+      } else if (window.innerWidth < 1450) {
+        return 6;
       } else if (window.innerWidth < 1900) {
-        return 5;
+        return 9;
       } else {
-        return 8;
+        return 10;
       }
     },
     discover() {
@@ -159,9 +165,6 @@ export default {
 }
 .container {
   padding: 0rem 1rem;
-}
-.swiper-slide:hover li {
-  transform: scale(1.24);
 }
 
 @media (max-width: 768px) {

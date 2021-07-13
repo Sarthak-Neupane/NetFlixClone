@@ -3,17 +3,44 @@
     <slot name="background"> </slot>
   </div>
   <div class="textarea">
-    <slot name="title"></slot>
+    <slot name="genres"></slot>
+    <div class="header">
+      <div class="title_time">
+        <slot name="title"></slot>
+        <slot name="runtime"></slot>
+      </div>
+      <div class="release_and_adult">
+        <slot name="releaseDate"></slot>
+        <slot name="adult"></slot>
+      </div>
+    </div>
     <slot name="desription"></slot>
     <div class="actions">
-      <base-button mode="play"> <slot name="playNow"> </slot> </base-button>
-      <base-button mode="info"> <slot name="info"> </slot> </base-button>
+      <base-button
+        @mouseover="$emit('change-color', 'true')"
+        @mouseleave="$emit('change-color', 'false')"
+        mode="info"
+      >
+        <slot name="playNow"> </slot>
+      </base-button>
+      <base-button
+        @mouseover="$emit('change-color', 'true')"
+        @mouseleave="$emit('change-color', 'false')"
+        mode="info"
+      >
+        <slot name="info"> </slot>
+      </base-button>
+    </div>
+    <div class="forTv">
+      <slot name="tv"></slot>
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  emits: ["change-color"],
+};
 </script>
 
 <style scoped>
@@ -33,6 +60,14 @@ export default {};
   background-image: linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
 }
 
+.actions {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 50px;
+  overflow: hidden;
+}
+
 .textarea {
   position: absolute;
   top: 50%;
@@ -42,5 +77,23 @@ export default {};
   display: flex;
   justify-content: center;
   flex-direction: column;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem;
+}
+
+.release_and_adult {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+}
+
+.forTv {
+  margin: 1.5rem 0rem;
 }
 </style>

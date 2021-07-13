@@ -9,9 +9,9 @@
             class="input"
             placeholder="Search"
           />
-          <div class="custom-select">
+          <!-- <div class="custom-select">
             <type v-model="selected"></type>
-          </div>
+          </div> -->
         </div>
         <button class="search">Search</button>
       </form>
@@ -24,6 +24,9 @@
         :image="'https://image.tmdb.org/t/p/w300' + item.backdrop_path"
         :id="item.id"
         :type="item.media_type"
+        :title="item.title"
+        :genre="item.genre_ids"
+        :name="item.name"
       ></search-list>
     </div>
   </section>
@@ -31,10 +34,10 @@
 
 <script>
 import SearchList from "../components/SearchList.vue";
-import Type from "../components/MovieOrTv.vue";
+// import Type from "../components/MovieOrTv.vue";
 export default {
   components: {
-    Type,
+    // Type,
     SearchList,
   },
   data() {
@@ -51,7 +54,7 @@ export default {
       this.isLoading = true;
       const response = await fetch(
         `
-https://api.themoviedb.org/3/search/multi?api_key=600356b3ea6a55171e5421f900b63ab9&language=en-US&query=${this.enteredData}&page=3&include_adult=false`,
+https://api.themoviedb.org/3/search/multi?api_key=600356b3ea6a55171e5421f900b63ab9&language=en-US&query=${this.enteredData}&page=1&include_adult=true`,
         {
           headers: {
             "content-type": "application/json;charset=utf-8",
@@ -62,12 +65,6 @@ https://api.themoviedb.org/3/search/multi?api_key=600356b3ea6a55171e5421f900b63a
       );
       const data = await response.json();
       this.isLoading = false;
-
-      //   const mainData = data.results.filter((e) => {
-      //     e.genre_ids;
-      //   });
-
-      //   console.log(mainData);
 
       data.results.forEach((item) => {
         if (
@@ -97,7 +94,6 @@ section {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* background: red; */
   height: 100%;
   margin-top: 5rem;
 }
@@ -132,7 +128,7 @@ form {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
+  /* flex-direction: column; */
 }
 
 .search {
@@ -145,10 +141,11 @@ form {
   border-radius: 20px;
   margin: 1rem 0;
   cursor: pointer;
+  /* remove this to make it to previous */
+  margin: 0rem 1rem;
 }
 
 .display {
-  /* background: yellow; */
   display: flex;
   justify-content: center;
   align-items: center;
