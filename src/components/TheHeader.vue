@@ -1,5 +1,20 @@
 <template>
-  <section>
+  <div @click="toggleMobileNav" v-show="mobile" class="menuIcon">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      x="0px"
+      y="0px"
+      width="24"
+      height="24"
+      viewBox="0 0 50 50"
+      style="fill: #ffffff"
+    >
+      <path
+        d="M 0 9 L 0 11 L 50 11 L 50 9 Z M 0 24 L 0 26 L 50 26 L 50 24 Z M 0 39 L 0 41 L 50 41 L 50 39 Z"
+      ></path>
+    </svg>
+  </div>
+  <section class="desktop">
     <nav>
       <div class="logo">
         <svg
@@ -26,7 +41,7 @@
           />
         </svg>
       </div>
-      <div class="links">
+      <div class="links" v-show="!mobile">
         <ul>
           <li><router-link :to="{ name: 'home' }">Home</router-link></li>
           <li><router-link :to="{ name: 'movies' }">Movies</router-link></li>
@@ -54,11 +69,27 @@
           </svg>
         </div>
       </router-link>
-      <div class="action">
+      <div class="action" v-show="!mobile">
         <button @click="logout">LogOut</button>
       </div>
     </div>
   </section>
+
+  <transition name="mobile-nav">
+    <section class="mobileNavBar" v-show="mobileNav">
+      <ul class="mobilelinks">
+        <li><router-link :to="{ name: 'home' }">Home</router-link></li>
+        <li><router-link :to="{ name: 'movies' }">Movies</router-link></li>
+        <li><router-link :to="{ name: 'tv' }">TV</router-link></li>
+        <li><router-link :to="{ name: 'mylist' }">My List</router-link></li>
+      </ul>
+      <div class="mobileother">
+        <div class="action">
+          <button @click="logout">LogOut</button>
+        </div>
+      </div>
+    </section>
+  </transition>
 </template>
 
 <script>
@@ -71,13 +102,36 @@ export default {
       console.log("logged out");
       this.$router.replace({ name: "login" });
     },
+    checkScreen() {
+      this.windowWidth = window.innerWidth;
+      if (this.windowWidth <= 750) {
+        this.mobile = true;
+      } else {
+        // this.mobile = false;
+        this.mobileNav = false;
+      }
+    },
+    toggleMobileNav() {
+      this.mobileNav = !this.mobileNav;
+    },
+  },
+  created() {
+    window.addEventListener("resize", this.checkScreen);
+    this.checkScreen();
+  },
+  data() {
+    return {
+      windowWidth: null,
+      mobile: null,
+      mobileNav: null,
+    };
   },
 };
 </script>
 
 <style scoped>
-section {
-  max-width: 90rem;
+.desktop {
+  max-width: 100vw;
   min-width: 100%;
   margin: auto;
   display: flex;
@@ -115,7 +169,7 @@ li {
 }
 
 .search {
-  margin-right: 3rem;
+  margin-right: 5rem;
 }
 
 a {
@@ -134,12 +188,74 @@ a:hover {
 }
 
 .action button {
-  padding: 0.3rem .6rem;
+  padding: 0.3rem 0.6rem;
   /* background: whitesmoke; */
   border: none;
   outline: none;
   border-radius: 10px;
   background: red;
   color: white;
+}
+
+.menuIcon {
+  position: absolute;
+  top: 4%;
+  right: 10%;
+  z-index: 9999;
+}
+
+.mobileNavBar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1754;
+  width: 250px;
+  height: 100vh;
+  background: black;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.mobileNavBar ul{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem 0;
+}
+
+.mobileNavBar ul li{
+  margin: 1rem 0;
+}
+
+.mobileother{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.mobileother .action{
+  margin: 1rem 0;
+}
+
+.mobile-nav-enter-active,
+.mobile-nav-leave-active{
+  transition: all 1s ease;
+}
+
+.mobile-nav-enter-from{
+  transform: translate(-250px)
+}
+
+.mobile-nav-enter-to{
+  transform: translate(0px)
+}
+
+.mobile-nav-leave-to{
+  transform: translate(-250px)
 }
 </style>

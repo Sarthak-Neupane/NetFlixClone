@@ -18,12 +18,12 @@ p {
 
 @media(max-width: 768px){
   head{
-    margin: 2rem
+    margin: 5rem 0;
   }
   p{
     text-align: center;
-    margin: 0rem 0;
-    font-weight: 700;
+    margin-top: 3rem;
+    font-weight: 500;
     font-size: 2rem;
   }
 }
