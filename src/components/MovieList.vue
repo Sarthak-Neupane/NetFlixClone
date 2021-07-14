@@ -268,12 +268,20 @@ a {
   color: white;
 }
 
+.header {
+  min-height: 30px;
+  max-height: 80px;
+  overflow: wrap;
+  margin-bottom: .5rem;
+}
+
 h1 {
-  font-size: 1.3rem;
+  font-size: clamp(1rem, 90%, 95%);
   opacity: 0;
   transform: translateY(-10px);
   transition: opacity 1s ease-in;
   transition: transform 0.7s ease-in;
+  font-weight: 500;
 }
 
 ul {
@@ -287,12 +295,15 @@ ul {
 }
 
 li {
-  font-size: 1rem;
+  font-size: 0.7rem;
   margin: 0.2rem 0.4rem;
-  text-align: center;
+  text-align: left;
   opacity: 0;
   transition: opacity 1.5s ease-in;
   /* color: red; */
+  background: red;
+  border-radius: 20px;
+  padding: 0.2rem;
 }
 
 button:hover {
@@ -300,7 +311,7 @@ button:hover {
 }
 
 button {
-  margin: 1rem 0.3rem;
+  margin: .6rem 0.3rem;
   background: none;
   outline: none;
   border: 1px solid white;

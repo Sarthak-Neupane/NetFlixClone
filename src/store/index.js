@@ -22,15 +22,18 @@ export default createStore({
     user: null,
     error: null,
     stored: null,
+    genres: null,
   },
   mutations: {
+    storeGenre(state, payload) {
+      state.genres = payload;
+      // console.log(state.genres);
+    },
     storeMovies(state, payload) {
       Object.entries(state.movies).forEach((value, index) =>
         payload[index].results.forEach((data) => {
           if (data.backdrop_path && data.poster_path) {
             value[1].push(data);
-          } else {
-            console.log(data);
           }
         })
       );
@@ -40,8 +43,6 @@ export default createStore({
         payload[index].results.forEach((data) => {
           if (data.backdrop_path && data.poster_path) {
             value[1].push(data);
-          } else {
-            console.log(data);
           }
         })
       );
@@ -60,6 +61,15 @@ export default createStore({
     },
   },
   actions: {
+    storeGenres(context, payload) {
+      // console.log(payload);
+      const obj = [];
+      payload.forEach((item) => {
+        obj.push(item);
+      });
+      context.commit("storeGenre", obj);
+    },
+
     async getMovies(context, payload) {
       context.state.movies.discover = [];
       context.state.movies.upcoming = [];
@@ -194,7 +204,7 @@ export default createStore({
       }
     },
     async removeList(context, payload) {
-      console.log(payload);
+      // console.log(payload);
       const response = await fetch(
         `https://netflixclonefirst-default-rtdb.firebaseio.com/list/${context.state.user.uid}.json`,
         {
@@ -204,20 +214,20 @@ export default createStore({
       );
       if (response.ok) {
         const responseData = await response.json();
-        console.log(responseData);
+        // console.log(responseData);
         let mainKey;
 
         for (const [key, value] of Object.entries(responseData)) {
-          console.log(`${key}: ${value.id}`);
+          // console.log(`${key}: ${value.id}`);
           // console.log(typeof payload)
           // console.log(typeof value)
           if (payload == value.id) {
-            console.log("milyo");
+            // console.log("milyo");
             mainKey = key;
           }
         }
 
-        console.log(mainKey);
+        // console.log(mainKey);
 
         await fetch(
           `https://netflixclonefirst-default-rtdb.firebaseio.com/list/${context.state.user.uid}/${mainKey}.json`,
@@ -352,6 +362,9 @@ export default createStore({
     },
     getStoredMovies(state) {
       return state.stored;
+    },
+    getGenres(state) {
+      return state.genres;
     },
   },
 });

@@ -19,10 +19,10 @@
       <h1>{{ title }}</h1>
     </template>
     <template #releaseDate
-      ><span>{{ releaseDate }}</span></template
+      ><span class="marginAdding">{{ releaseDate }}</span></template
     >
     <template #adult v-if="pathMovie || pathTV"
-      ><span :class="getClass">adult</span></template
+      ><span :class="getClass" class="marginAdding">adult</span></template
     >
     <template v-if="pathMovie" #runtime>
       <span class="time"> {{ time }}min </span>
@@ -200,7 +200,7 @@ export default {
             title: this.title,
             poster: this.poster,
             id: this.id,
-            genre: '',
+            genre: "",
             mediaType: this.type,
           });
           this.loading = false;
@@ -321,5 +321,9 @@ li {
   top: 20%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.marginAdding, .time {
+  margin-right: 1rem;
 }
 </style>

@@ -135,6 +135,7 @@ export default {
       error: false,
       loading: false,
       added: null,
+      mainGenre: [],
     };
   },
   props: ["poster", "id", "name", "genres", "allGenre"],
@@ -171,6 +172,19 @@ export default {
       // if (this.genres.length !== 0) {
       //   console.log(this.genres)
       // }
+      // console.log(this.allGenre)
+      const storedGenres = this.$store.getters.getGenres;
+      // this.genres.forEach(element =>
+      // });
+      console.log(storedGenres)
+
+      // storedGenres.forEach((element) => {
+      //   if (this.genres.includes(element.id)) {
+      //     this.mainGenre.push(element.name);
+      //   }
+      // });
+
+      // console.log(this.mainGenre);
     },
     addedOrNot() {
       const stored = this.$store.getters.getStoredMovies;

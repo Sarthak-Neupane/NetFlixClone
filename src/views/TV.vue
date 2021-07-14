@@ -28,7 +28,7 @@
                 :id="tv.id"
                 :name="tv.name"
                 :genres="tv.genre_ids"
-                :allGenre="Genres"
+                :allGenre="genres"
               ></tv-list>
             </swiper-slide>
           </swiper>
@@ -50,6 +50,7 @@ export default {
       isLoading: false,
       Datas: [],
       Genres: [],
+      genres: [],
     };
   },
   components: {
@@ -95,7 +96,15 @@ export default {
         }
       );
       const responseData = await response.json();
-      this.Genres.push(responseData.genres);
+      // console.log(responseData.genres)
+      responseData.genres.forEach((element) => {
+        this.genres.push({
+          name: element.name,
+          id: element.id,
+        });
+      });
+      // console.log(this.genres);
+      this.$store.dispatch('storeGenres', this.genres)
     },
   },
   created() {

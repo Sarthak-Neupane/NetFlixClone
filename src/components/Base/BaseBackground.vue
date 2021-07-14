@@ -7,9 +7,9 @@
     <div class="header">
       <div class="title_time">
         <slot name="title"></slot>
-        <slot name="runtime"></slot>
       </div>
       <div class="release_and_adult">
+        <slot name="runtime"></slot>
         <slot name="releaseDate"></slot>
         <slot name="adult"></slot>
       </div>
@@ -84,23 +84,23 @@ export default {
 
 .header {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  text-align: left;
   padding: 0 1rem;
 }
 
 .release_and_adult {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
-  flex-direction: column;
 }
 
 .forTv {
   margin: 1.5rem 0rem;
 }
 
-a{
+a {
   text-decoration: none;
 }
 </style>
