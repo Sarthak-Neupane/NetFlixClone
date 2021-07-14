@@ -165,8 +165,8 @@ export default {
           title: this.name,
           poster: this.poster,
           id: this.id,
-          // genre: this.DisplayGenre[0],
-          // mediaType: 'movie'
+          genre: this.DisplayGenre,
+          mediaType: 'movie'
         })
       } catch (error) {
         console.log(error.msg)

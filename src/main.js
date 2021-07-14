@@ -10,7 +10,7 @@ import BaseButton from "./components/Base/BaseButton.vue";
 import BigBackground from "./components/Base/bigBackground.vue";
 import BaseSpinner from "./components/Base/BaseSpinner.vue";
 import BaseSwiper from "./components/Base/BaseSwiper.vue";
-
+import BaseDialog from "./components/Base/BaseDialog.vue";
 
 const firebaseConfig = {
   apiKey: "AIzaSyC82icMDSAeleMuNh3oJs-rH0dRDUb55JQ",
@@ -24,19 +24,6 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
-// let app;
-
-// firebase.auth().onAuthStateChanged((user) => {
-//   console.log("user", user);
-//   if (!app) {
-//     app = new Vue({
-//       router,
-//       store,
-//       render: (h) => h(App),
-//     }).$mount("#app");
-//   }
-// });
-
 const app = createApp(App);
 
 app.component("base-background", BaseBackground);
@@ -44,6 +31,7 @@ app.component("base-button", BaseButton);
 app.component("big-background", BigBackground);
 app.component("base-swiper", BaseSwiper);
 app.component("base-spinner", BaseSpinner);
+app.component("base-dialog", BaseDialog);
 
 app.use(store);
 app.use(router);

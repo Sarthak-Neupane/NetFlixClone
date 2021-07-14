@@ -41,6 +41,9 @@ export default {
 </script>
 
 <style scoped>
+section{
+  background: black;
+}
 ul {
   display: flex;
   /* justify-content: center;

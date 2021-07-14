@@ -19,7 +19,23 @@
       <p>Already a user? <router-link to="/login"> Login </router-link></p>
     </form>
   </section> -->
+  <teleport to="body">
+    <div class="dialog" v-if="error" @close-dialog="clearError">
+      <base-dialog>
+        <template #header>
+          <h1>Unable To SignUp</h1>
+        </template>
 
+        <template #body>
+          {{ error }}
+        </template>
+
+        <template #footer>
+          <base-button @click="clearError" mode="close"> Close </base-button>
+        </template>
+      </base-dialog>
+    </div>
+  </teleport>
   <section>
     <div class="container">
       <div class="form-contain">
@@ -29,7 +45,7 @@
 
         <div class="title">Welcome</div>
 
-        <form @submit.prevent="signUp">
+        <form @submit.prevent="validate">
           <div class="input1 inputs">
             <input
               type="text"
@@ -105,18 +121,53 @@ export default {
     return {
       email: "",
       password: "",
-      error: "",
+      error: null,
       firstName: "",
       lastName: "",
       loading: "",
+      allErrors: [],
     };
   },
   methods: {
     ...mapActions(["signUpAction"]),
+    validate() {
+      this.clearError();
+      const mailFormat =
+        /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
+      const passwordFormat =
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+      // if (strongRegex.test(this.password)) {
+      //   this.$refs.password.classList.add("strong");
+      // } else if (mediumRegex.test(this.password)) {
+      //   this.$refs.password.classList.add("medium");
+      // }
+
+      if (!this.firstName || !this.lastName || !this.email || !this.password) {
+        this.error = "Please Fill All the details!!";
+      } else if (mailFormat.exec(this.email) == null) {
+        this.error = "Must be a Valid Email";
+      } else if (passwordFormat.exec(this.password) == null) {
+        this.error =
+          "Password Must be 8 characters long and contaian atleast a special character, a number , an UpperCase letter and a LowerCase letter";
+      } else {
+        this.signUp();
+      }
+    },
     async signUp() {
       await this.signUpAction({ email: this.email, password: this.password });
+      this.error = this.$store.getters.getError;
       this.$router.replace({ name: "login" });
     },
+    clearError() {
+      this.error = null;
+    },
+    // computed: {
+    //   errorMsg() {
+    //     return this.$store.getters.getError;
+    //   },
+    // },
     labelUpFirstname() {
       this.$refs.firstName.nextElementSibling.classList.add("active");
     },
@@ -134,6 +185,14 @@ export default {
 </script>
 
 <style scoped>
+.strong {
+  border-left: 5px solid green;
+}
+
+.medium {
+  border-left: 5px solid orange;
+}
+
 .error {
   color: red;
   position: absolute;
@@ -319,5 +378,10 @@ section {
 
 .title {
   font-size: 2.4rem;
+}
+.dialog {
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 </style>

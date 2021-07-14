@@ -12,7 +12,23 @@
     </form>
     <div class="error" v-if="error">{{ error.message }}</div>
   </div> -->
+  <teleport to="body">
+    <div class="dialog" v-if="error" @close-dialog="clearError">
+      <base-dialog>
+        <template #header>
+          <h1>Unable To login</h1>
+        </template>
 
+        <template #body>
+          {{ error }}
+        </template>
+
+        <template #footer>
+          <base-button @click="clearError" mode="close"> Close </base-button>
+        </template>
+      </base-dialog>
+    </div>
+  </teleport>
   <section>
     <div class="container">
       <div class="form-contain">
@@ -74,10 +90,19 @@ export default {
     ...mapActions(["signInAction"]),
     async login() {
       await this.signInAction({ email: this.email, password: this.password });
+      this.error = this.$store.getters.getError;
       console.log("logged in");
-      this.$router.replace({name: 'home'})
+      this.$router.replace({ name: "home" });
     },
-
+    clearError() {
+      console.log('cleared')
+      this.error = null;
+    },
+    // computed: {
+    //   errorMsg() {
+    //     return this.$store.getters.getError;
+    //   },
+    // },
     labelUpFirstname() {
       this.$refs.firstName.nextElementSibling.classList.add("active");
     },
@@ -281,5 +306,11 @@ section {
 
 .title {
   font-size: 2.4rem;
+}
+
+.dialog {
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 </style>

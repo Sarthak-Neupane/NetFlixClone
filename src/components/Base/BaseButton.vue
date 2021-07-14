@@ -34,9 +34,13 @@ button {
   box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.3);
 }
 
-.play {
-  background: rgba(255, 255, 255);
+.close {
+  background: rgba(243, 0, 0, 1);
   color: black;
-  margin-right: 2rem;
+  margin-right: .5rem;
+  color: white;
+  padding: .5rem 2rem;
+  border-radius: 10px;
+  cursor: pointer;
 }
 </style>

@@ -21,6 +21,7 @@ export default createStore({
     },
     user: null,
     error: null,
+    stored: null,
   },
   mutations: {
     storeMovies(state, payload) {
@@ -42,6 +43,12 @@ export default createStore({
     },
     setError(state, payload) {
       state.error = payload;
+    },
+    // storeList(state, payload) {
+    //   state.stored.push(payload);
+    // },
+    storeData(state, payload) {
+      state.stored = payload;
     },
   },
   actions: {
@@ -118,9 +125,10 @@ export default createStore({
         .auth()
         .createUserWithEmailAndPassword(payload.email, payload.password)
         .then(() => {
-          // commit("setUser", response.user);
+          // localStorage.setItem("user", response);
         })
         .catch((error) => {
+          console.log(error);
           commit("setError", error.message);
         });
     },
@@ -132,6 +140,7 @@ export default createStore({
           commit("setUser", null);
         })
         .catch((error) => {
+          console.log(error);
           commit("setError", error.message);
         });
     },
@@ -141,16 +150,24 @@ export default createStore({
         .auth()
         .signInWithEmailAndPassword(payload.email, payload.password)
         .then(() => {
-          // commit("setUser", response.user);
+          // commit("setUser", response);
         })
         .catch((error) => {
+          console.log(error.message);
           commit("setError", error.message);
         });
     },
 
+    // autoLogin(context) {
+    //   const userExists = localStorage.getItem("user");
+    //   if (userExists) {
+    //     context.commit("setUser", userExists);
+    //   }
+    // },
+
     async storeList(context, payload) {
       const response = await fetch(
-        `https://netflixclonefirst-default-rtdb.firebaseio.com/${context.state.user.user.uid}/list.json`,
+        `https://netflixclonefirst-default-rtdb.firebaseio.com/list/${context.state.user.uid}.json`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -164,9 +181,56 @@ export default createStore({
         }
       );
       if (response.ok) {
-        //..
+        // context.commit("storeList", {
+        //   id: payload.id,
+        //   title: payload.title,
+        //   poster: payload.poster,
+        //   mediaType: payload.mediaType,
+        //   genres: payload.genre,
+        // });
       } else {
         throw new Error("Couldnt save data");
+      }
+    },
+    async getList(context) {
+      const response = await fetch(
+        `https://netflixclonefirst-default-rtdb.firebaseio.com/list/${context.state.user.uid}.json`,
+        {
+          method: "GET",
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+      if (response.ok) {
+        // context.commit("storeList", {
+        //   id: payload.id,
+        //   title: payload.title,
+        //   poster: payload.poster,
+        //   mediaType: payload.mediaType,
+        //   genres: payload.genre,
+        // });
+        const responseData = await response.json();
+        const items = [];
+
+        for (let key in responseData) {
+          let item = responseData[key];
+          // console.log(item.genres);
+          // console.log(item.id);
+          // console.log(item.mediaType);
+          // console.log(item.title);
+          // console.log(item.poster);
+          const obj = {
+            genres: item.genres,
+            id: item.id,
+            mediaType: item.mediaType,
+            title: item.title,
+            poster: item.poster,
+          };
+          items.push(obj);
+        }
+
+        context.commit("storeData", items);
+      } else {
+        throw new Error("Couldnt Get data");
       }
     },
   },
@@ -248,6 +312,9 @@ export default createStore({
     },
     getError(state) {
       return state.error;
+    },
+    getStoredMovies(state) {
+      return state.stored;
     },
   },
 });

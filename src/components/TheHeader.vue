@@ -133,7 +133,13 @@ a:hover {
   cursor: text;
 }
 
-.action .button {
-  padding: 0.3rem;
+.action button {
+  padding: 0.3rem .6rem;
+  /* background: whitesmoke; */
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  background: red;
+  color: white;
 }
 </style>

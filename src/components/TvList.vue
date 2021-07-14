@@ -58,6 +58,7 @@
             <button
               @mouseover="changeColorInfo('true')"
               @mouseleave="changeColorInfo('false')"
+              @click="updateList()"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -164,6 +165,21 @@ export default {
         this.colorInfo = "#ffffff";
       }
     },
+    updateList(){
+      try {
+        this.$store.dispatch('storeList', {
+          title: this.name,
+          poster: this.poster,
+          id: this.id,
+          genre: this.DisplayGenre,
+          mediaType: 'tv'
+        })
+      } catch (error) {
+        console.log(error.msg)
+        this.error = true
+        this.errorMessage = error.msg
+      }
+    }
   },
 };
 </script>
