@@ -158,7 +158,7 @@ export default {
     async signUp() {
       await this.signUpAction({ email: this.email, password: this.password });
       this.error = this.$store.getters.getError;
-      this.$router.replace({ name: "login" });
+      this.$router.replace({ name: "home" });
     },
     clearError() {
       this.error = null;

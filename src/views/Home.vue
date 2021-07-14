@@ -34,14 +34,14 @@ export default {
       return this.$store.getters.getUser;
     },
   },
-  created() {
-    
+  mounted() {
+    this.$store.dispatch("getList");
   },
 };
 </script>
 
 <style scoped>
-section{
+section {
   background: black;
 }
 ul {

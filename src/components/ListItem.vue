@@ -25,6 +25,8 @@ export default {
 a {
   color: white;
   text-decoration: none;
+  padding: 0;
+  margin: 1rem 2rem;
 }
 
 .first {
@@ -33,8 +35,6 @@ a {
   justify-content: center;
   align-items: center;
   width: 154px;
-  height: 100%;
-  margin: 7rem 2rem;
 }
 
 ul {

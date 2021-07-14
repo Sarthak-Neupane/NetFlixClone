@@ -18,6 +18,7 @@
         <template #swiper>
           <swiper
             :slides-per-view="dimensions"
+            :space-between="10"
             navigation
             :scrollbar="{ draggable: true }"
           >
@@ -106,11 +107,11 @@ export default {
       if (window.innerWidth < 400) {
         return 2;
       } else if (window.innerWidth < 768) {
-        return 3;
-      } else if (window.innerWidth < 1450) {
         return 4;
+      } else if (window.innerWidth < 1450) {
+        return 6;
       } else if (window.innerWidth < 1900) {
-        return 8;
+        return 9;
       } else {
         return 10;
       }

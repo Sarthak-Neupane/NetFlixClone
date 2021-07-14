@@ -10,6 +10,7 @@
       :releaseDate="data.release_date"
       :time="data.runtime"
       :adult="data.adult"
+      :poster="data.poster_path"
     >
     </big-background>
   </section>

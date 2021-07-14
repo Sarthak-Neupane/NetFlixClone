@@ -8,6 +8,7 @@
             v-model="enteredData"
             class="input"
             placeholder="Search"
+            ref="input"
           />
           <!-- <div class="custom-select">
             <type v-model="selected"></type>
@@ -17,17 +18,22 @@
       </form>
     </div>
     <base-spinner v-if="isLoading"></base-spinner>
-    <div v-else class="display">
-      <search-list
-        v-for="item in data"
-        :key="item.id"
-        :image="'https://image.tmdb.org/t/p/w300' + item.backdrop_path"
-        :id="item.id"
-        :type="item.media_type"
-        :title="item.title"
-        :genre="item.genre_ids"
-        :name="item.name"
-      ></search-list>
+    <div v-if="!isLoading" class="display">
+      <p v-if="empty">No Search Results Found For '{{ inputValue }}'</p>
+      <div v-else class="results">
+        <p>
+          <search-list
+            v-for="item in data"
+            :key="item.id"
+            :image="'https://image.tmdb.org/t/p/w300' + item.backdrop_path"
+            :id="item.id"
+            :type="item.media_type"
+            :title="item.title"
+            :genre="item.genre_ids"
+            :name="item.name"
+          ></search-list>
+        </p>
+      </div>
     </div>
   </section>
 </template>
@@ -46,10 +52,17 @@ export default {
       isLoading: false,
       selected: null,
       data: [],
+      empty: null,
     };
+  },
+  computed: {
+    inputValue() {
+      return this.$refs.input.value;
+    },
   },
   methods: {
     async getData() {
+      this.empty = false;
       this.data = [];
       this.isLoading = true;
       const response = await fetch(
@@ -66,23 +79,27 @@ https://api.themoviedb.org/3/search/multi?api_key=600356b3ea6a55171e5421f900b63a
       const data = await response.json();
       this.isLoading = false;
 
-      data.results.forEach((item) => {
-        if (
-          item.genre_ids &&
-          item.genre_ids.length !== 0 &&
-          item.backdrop_path !== null
-        ) {
-          this.data.push(item);
-        }
-      });
-      this.data.sort((a, b) => {
-        if (a.popularity > b.popularity) {
-          return -1;
-        } else {
-          return 1;
-        }
-      });
-      console.log(this.data);
+      if (data.results.length !== 0) {
+        data.results.forEach((item) => {
+          if (
+            item.genre_ids &&
+            item.genre_ids.length !== 0 &&
+            item.backdrop_path !== null
+          ) {
+            this.data.push(item);
+          }
+        });
+        this.data.sort((a, b) => {
+          if (a.popularity > b.popularity) {
+            return -1;
+          } else {
+            return 1;
+          }
+        });
+        console.log(this.data);
+      } else {
+        this.empty = true;
+      }
     },
   },
 };
@@ -150,6 +167,14 @@ form {
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  max-width: 90%;
+  width: 90vw;
+}
+
+.results p {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 }
 </style>

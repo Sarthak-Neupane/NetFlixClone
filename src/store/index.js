@@ -27,14 +27,22 @@ export default createStore({
     storeMovies(state, payload) {
       Object.entries(state.movies).forEach((value, index) =>
         payload[index].results.forEach((data) => {
-          value[1].push(data);
+          if (data.backdrop_path && data.poster_path) {
+            value[1].push(data);
+          } else {
+            console.log(data);
+          }
         })
       );
     },
     storeTv(state, payload) {
       Object.entries(state.tv).forEach((value, index) =>
         payload[index].results.forEach((data) => {
-          value[1].push(data);
+          if (data.backdrop_path && data.poster_path) {
+            value[1].push(data);
+          } else {
+            console.log(data);
+          }
         })
       );
     },
@@ -145,7 +153,7 @@ export default createStore({
         });
     },
 
-    signInAction({ commit }, payload) {
+    async signInAction({ commit }, payload) {
       return firebase
         .auth()
         .signInWithEmailAndPassword(payload.email, payload.password)
@@ -176,18 +184,60 @@ export default createStore({
             title: payload.title,
             poster: payload.poster,
             mediaType: payload.mediaType,
-            genres: payload.genre,
           }),
         }
       );
       if (response.ok) {
-        // context.commit("storeList", {
-        //   id: payload.id,
-        //   title: payload.title,
-        //   poster: payload.poster,
-        //   mediaType: payload.mediaType,
-        //   genres: payload.genre,
-        // });
+        //
+      } else {
+        throw new Error("Couldnt save data");
+      }
+    },
+    async removeList(context, payload) {
+      console.log(payload);
+      const response = await fetch(
+        `https://netflixclonefirst-default-rtdb.firebaseio.com/list/${context.state.user.uid}.json`,
+        {
+          method: "GET",
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+      if (response.ok) {
+        const responseData = await response.json();
+        console.log(responseData);
+        let mainKey;
+
+        for (const [key, value] of Object.entries(responseData)) {
+          console.log(`${key}: ${value.id}`);
+          // console.log(typeof payload)
+          // console.log(typeof value)
+          if (payload == value.id) {
+            console.log("milyo");
+            mainKey = key;
+          }
+        }
+
+        console.log(mainKey);
+
+        await fetch(
+          `https://netflixclonefirst-default-rtdb.firebaseio.com/list/${context.state.user.uid}/${mainKey}.json`,
+          {
+            method: "DELETE",
+            headers: { "Content-Type": "application/json" },
+          }
+        );
+
+        // for (let key in responseData) {
+        //   if (responseData[key].id == payload.id) {
+        //     await fetch(
+        //       `https://netflixclonefirst-default-rtdb.firebaseio.com/list/${context.state.user.uid}/${responseData[key].id}.json`,
+        //       {
+        //         method: "DELETE",
+        //         headers: { "Content-Type": "application/json" },
+        //       }
+        //     );
+        //   }
+        // }
       } else {
         throw new Error("Couldnt save data");
       }
@@ -201,23 +251,11 @@ export default createStore({
         }
       );
       if (response.ok) {
-        // context.commit("storeList", {
-        //   id: payload.id,
-        //   title: payload.title,
-        //   poster: payload.poster,
-        //   mediaType: payload.mediaType,
-        //   genres: payload.genre,
-        // });
         const responseData = await response.json();
         const items = [];
 
         for (let key in responseData) {
           let item = responseData[key];
-          // console.log(item.genres);
-          // console.log(item.id);
-          // console.log(item.mediaType);
-          // console.log(item.title);
-          // console.log(item.poster);
           const obj = {
             genres: item.genres,
             id: item.id,
@@ -227,7 +265,6 @@ export default createStore({
           };
           items.push(obj);
         }
-
         context.commit("storeData", items);
       } else {
         throw new Error("Couldnt Get data");

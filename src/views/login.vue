@@ -82,20 +82,25 @@ export default {
     return {
       email: "",
       password: "",
-      error: "",
+      error: null,
       loading: false,
     };
   },
   methods: {
     ...mapActions(["signInAction"]),
     async login() {
+      this.error = null;
       await this.signInAction({ email: this.email, password: this.password });
       this.error = this.$store.getters.getError;
-      console.log("logged in");
-      this.$router.replace({ name: "home" });
+      console.log(this.error);
+      if (this.error) {
+        //
+      } else {
+        this.$router.replace({ name: "home" });
+      }
     },
     clearError() {
-      console.log('cleared')
+      console.log("cleared");
       this.error = null;
     },
     // computed: {

@@ -3,10 +3,8 @@
     <div class="spinner" v-if="isLoading"><base-spinner></base-spinner></div>
     <big-background
       v-if="hasMovies"
-      :background="
-        'https://image.tmdb.org/t/p/original' +
-        discover.datas[getRandom].backdrop_path
-      "
+      :background="discover.datas[getRandom].backdrop_path"
+      :poster="discover.datas[getRandom].poster_path"
       :title="discover.datas[getRandom].title"
       :desc="discover.datas[getRandom].overview"
       :id="discover.datas[getRandom].id"
@@ -22,10 +20,7 @@
             navigation
             :scrollbar="{ draggable: true }"
           >
-            <swiper-slide
-              v-for="movie in items.datas"
-              :key="movie"
-            >
+            <swiper-slide v-for="movie in items.datas" :key="movie">
               <movie-list
                 :poster="movie.poster_path"
                 :id="movie.id"
@@ -110,6 +105,7 @@ export default {
   created() {
     this.getData();
     this.getGenres();
+    this.$store.dispatch("getList");
   },
   computed: {
     dimensions() {

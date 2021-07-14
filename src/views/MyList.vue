@@ -1,8 +1,11 @@
 <template>
   <div class="spinner"><base-spinner v-if="loading"></base-spinner></div>
-  <section v-if="!loading" class="list">
+  <section class="list" v-if="empty && !loading">
+    <p>Add Something to the List. Currently, You have none</p>
+  </section>
+  <section v-if="!loading && !empty && data" class="list">
     <list-item
-      v-for="item in getStoredMovies"
+      v-for="item in data"
       :key="item.id"
       :title="item.title"
       :id="item.id"
@@ -12,7 +15,6 @@
     >
     </list-item>
   </section>
-
   <teleport to="body">
     <div class="dialog" v-if="error" @close-dialog="clearError">
       <base-dialog>
@@ -38,7 +40,9 @@ export default {
   data() {
     return {
       error: null,
-      loading: false,
+      loading: null,
+      empty: false,
+      data: null,
     };
   },
   components: {
@@ -48,10 +52,8 @@ export default {
     // getUser() {
     //   return this.$store.getters.getUser;
     // },
-    getStoredMovies() {
-      return this.$store.getters.getStoredMovies;
-    },
   },
+
   created() {
     this.getStored();
   },
@@ -60,25 +62,34 @@ export default {
       this.error = null;
     },
     async getStored() {
+      this.data = null;
       this.loading = true;
       await this.$store.dispatch("getList");
-      this.loading = false;
+      if (this.$store.getters.getStoredMovies.length !== 0) {
+        this.data = this.$store.getters.getStoredMovies;
+        console.log(this.data);
+        this.loading = false;
+      } else {
+        this.loading = false;
+        this.empty = true;
+      }
     },
   },
 };
 </script>
 
 <style scoped>
-.list{
+.list {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
+  margin: 7rem 2rem;
 }
-.spinner{
+.spinner {
   position: absolute;
   top: 50%;
-  left:50%;
+  left: 50%;
   transform: translate(-50%, -50%);
   z-index: 999;
 }

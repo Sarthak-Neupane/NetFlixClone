@@ -19,9 +19,7 @@ export default {
   mounted() {
     this.authAction();
   },
-  // created() {
-  //   this.$store.dispatch("autoLogin");
-  // },
+  created() {},
 };
 </script>
 
