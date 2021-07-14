@@ -29,7 +29,7 @@
 
         <div class="title">Welcome</div>
 
-        <form @submit.prevent="pressed">
+        <form @submit.prevent="signUp">
           <div class="input1 inputs">
             <input
               type="text"
@@ -99,6 +99,7 @@
 <script>
 // import firebase from "firebase/app";
 // import "firebase/auth";
+import { mapActions } from "vuex";
 export default {
   data() {
     return {
@@ -107,22 +108,14 @@ export default {
       error: "",
       firstName: "",
       lastName: "",
-      loading: ""
+      loading: "",
     };
   },
   methods: {
-    async pressed() {
-      this.loading = true;
-      await this.$store.dispatch("signup", {
-        firstName: this.firstName,
-        lastName: this.lastName,
-        email: this.email,
-        password: this.password,
-      });
-      this.loading = false;
-      if (this.loading) {
-        this.$router.replace({ name: "login" });
-      }
+    ...mapActions(["signUpAction"]),
+    async signUp() {
+      await this.signUpAction({ email: this.email, password: this.password });
+      this.$router.replace({ name: "login" });
     },
     labelUpFirstname() {
       this.$refs.firstName.nextElementSibling.classList.add("active");
@@ -166,6 +159,7 @@ section {
 
 .container {
   width: 40vw;
+  min-width: 20rem;
   height: 80vh;
   display: -webkit-box;
   display: -ms-flexbox;

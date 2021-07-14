@@ -19,16 +19,8 @@ export default createStore({
       topRated: [],
       originals: [],
     },
-
-    // store: {
-    //   userID: 'a1',
-    //   id: null,
-    //   title: null,
-    //   mediaType: null,
-    //   genre: [],
-    // },
-
     user: null,
+    error: null,
   },
   mutations: {
     storeMovies(state, payload) {
@@ -45,11 +37,11 @@ export default createStore({
         })
       );
     },
-    // userSigned(state, payload) {
-    //   state.user = payload;
-    // },
-    userLogged(state) {
-      state.user = firebase.auth().currentUser;
+    setUser(state, payload) {
+      state.user = payload;
+    },
+    setError(state, payload) {
+      state.error = payload;
     },
   },
   actions: {
@@ -111,54 +103,51 @@ export default createStore({
 
       context.commit("storeTv", data);
     },
-    signup(_, payload) {
+
+    authAction({ commit }) {
+      firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+          commit("setUser", user);
+        } else {
+          commit("setUser", null);
+        }
+      });
+    },
+    signUpAction({ commit }, payload) {
       firebase
         .auth()
         .createUserWithEmailAndPassword(payload.email, payload.password)
-        .then((data) => {
-          data.user
-            .updateProfile({
-              displayName: payload.firstName + payload.lastName,
-            })
-            .then(() => {
-              console.log("signed in");
-            });
+        .then(() => {
+          // commit("setUser", response.user);
         })
         .catch((error) => {
-          alert(error.message);
+          commit("setError", error.message);
         });
     },
-
-    // authChange(context) {
-    //   firebase.auth().onAuthStateChanged((user) => {
-    //     if (user) {
-    //       context.state.user = user;
-    //     } else {
-    //       context.state.user = null;
-    //     }
-    //   });
-    // },
-
-    logOut() {
+    signOutAction({ commit }) {
       firebase
         .auth()
         .signOut()
         .then(() => {
-          console.log("logged out");
+          commit("setUser", null);
+        })
+        .catch((error) => {
+          commit("setError", error.message);
         });
     },
-    login(context, payload) {
-      firebase
+
+    signInAction({ commit }, payload) {
+      return firebase
         .auth()
         .signInWithEmailAndPassword(payload.email, payload.password)
         .then(() => {
-          context.commit("userLogged");
-          console.log("logged in");
+          // commit("setUser", response.user);
         })
         .catch((error) => {
-          console.log(error);
+          commit("setError", error.message);
         });
     },
+
     async storeList(context, payload) {
       const response = await fetch(
         `https://netflixclonefirst-default-rtdb.firebaseio.com/${context.state.user.user.uid}/list.json`,
@@ -253,6 +242,12 @@ export default createStore({
     },
     getUser(state) {
       return state.user;
+    },
+    isUserAuth(state) {
+      return !!state.user;
+    },
+    getError(state) {
+      return state.error;
     },
   },
 });

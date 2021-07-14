@@ -20,7 +20,7 @@
 
         <div class="title">Log In</div>
 
-        <form @submit.prevent="pressed">
+        <form @submit.prevent="login">
           <div class="input1 inputs">
             <input
               type="email"
@@ -60,6 +60,7 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 export default {
   data() {
     return {
@@ -70,17 +71,11 @@ export default {
     };
   },
   methods: {
-    async pressed() {
-      try {
-        await this.$store.dispatch("login", {
-          email: this.email,
-          password: this.password,
-        });
-          console.log('roter should be changed')
-          this.$router.replace({ name: "movies" });
-      } catch (error) {
-        console.log(error);
-      }
+    ...mapActions(["signInAction"]),
+    async login() {
+      await this.signInAction({ email: this.email, password: this.password });
+      console.log("logged in");
+      this.$router.replace({name: 'home'})
     },
 
     labelUpFirstname() {
@@ -125,6 +120,7 @@ section {
 
 .container {
   width: 50vw;
+  min-width: 20rem;
   height: 80vh;
   display: -webkit-box;
   display: -ms-flexbox;

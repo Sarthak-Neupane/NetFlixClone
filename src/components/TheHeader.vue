@@ -62,11 +62,14 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 export default {
   methods: {
+    ...mapActions(["signOutAction"]),
     async logout() {
-      await this.$store.dispatch("logOut");
-      this.$router.push("/login");
+      await this.signOutAction();
+      console.log("logged out");
+      this.$router.replace({ name: "login" });
     },
   },
 };
