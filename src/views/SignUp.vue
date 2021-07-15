@@ -158,7 +158,12 @@ export default {
     async signUp() {
       await this.signUpAction({ email: this.email, password: this.password });
       this.error = this.$store.getters.getError;
-      this.$router.replace({ name: "home" });
+      console.log(this.error)
+      if (this.error === null) {
+        console.log(this.$store.getters.getError)
+      } else {
+        this.$router.replace({ name: "login" });
+      }
     },
     clearError() {
       this.error = null;

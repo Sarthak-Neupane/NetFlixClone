@@ -168,6 +168,7 @@ export default {
     },
     addedOrNot() {
       const stored = this.$store.getters.getStoredMovies;
+      console.log(stored)
       stored.forEach((element) => {
         if (element.id === this.id) {
           this.added = true;

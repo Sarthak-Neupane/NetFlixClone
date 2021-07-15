@@ -27,6 +27,7 @@
                 :name="movie.title"
                 :genres="movie.genre_ids"
                 :allGenre="Genres"
+                :posterSize="154"
               ></movie-list>
             </swiper-slide>
           </swiper>

@@ -12,6 +12,12 @@ export default createStore({
       inTheatres: [],
       trending: [],
     },
+    home: {
+      VoteHigh: [],
+      VoteHighSecond: [],
+      topRated: [],
+      topRatedTv: [],
+    },
     tv: {
       airingToday: [],
       onTheAir: [],
@@ -38,6 +44,15 @@ export default createStore({
         })
       );
     },
+    storeHome(state, payload) {
+      Object.entries(state.home).forEach((value, index) =>
+        payload[index].results.forEach((data) => {
+          if (data.backdrop_path && data.poster_path) {
+            value[1].push(data);
+          }
+        })
+      );
+    },
     storeTv(state, payload) {
       Object.entries(state.tv).forEach((value, index) =>
         payload[index].results.forEach((data) => {
@@ -52,6 +67,11 @@ export default createStore({
     },
     setError(state, payload) {
       state.error = payload;
+      if (payload !== null) {
+        console.log(payload);
+      } else {
+        console.log("error aayena");
+      }
     },
     // storeList(state, payload) {
     //   state.stored.push(payload);
@@ -68,6 +88,29 @@ export default createStore({
         obj.push(item);
       });
       context.commit("storeGenre", obj);
+    },
+    async getHome(context, payload) {
+      context.state.home.VoteHigh = [];
+      const options = {
+        headers: {
+          "content-type": "application/json;charset=utf-8",
+          authorization:
+            "Bearer <<eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2MDAzNTZiM2VhNmE1NTE3MWU1NDIxZjkwMGI2M2FiOSIsInN1YiI6IjYwZTNjNTQ5YjNmNmY1MDAyYzQ2OGJkYiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.sr0GDGc-LG43wFiR3NQXMWLR1DjbmlBHSLSrvtWkUEM>>",
+        },
+      };
+
+      const results = await Promise.all([
+        fetch(payload.Votehigh, options),
+        fetch(payload.VotehighSecond, options),
+        fetch(payload.topRated, options),
+        fetch(payload.topRatedTv, options),
+      ]);
+
+      const dataPromises = results.map((res) => res.json());
+
+      const data = await Promise.all(dataPromises);
+
+      context.commit("storeHome", data);
     },
 
     async getMovies(context, payload) {
@@ -138,7 +181,8 @@ export default createStore({
         }
       });
     },
-    signUpAction({ commit }, payload) {
+    async signUpAction({ commit }, payload) {
+      commit("setError", null);
       firebase
         .auth()
         .createUserWithEmailAndPassword(payload.email, payload.password)
@@ -150,7 +194,7 @@ export default createStore({
           commit("setError", error.message);
         });
     },
-    signOutAction({ commit }) {
+    async signOutAction({ commit }) {
       firebase
         .auth()
         .signOut()
@@ -164,6 +208,7 @@ export default createStore({
     },
 
     async signInAction({ commit }, payload) {
+      commit("setError", null);
       return firebase
         .auth()
         .signInWithEmailAndPassword(payload.email, payload.password)
@@ -365,6 +410,30 @@ export default createStore({
     },
     getGenres(state) {
       return state.genres;
+    },
+    getHomeVoteHigh(state) {
+      return {
+        name: "ChillFlix Originals",
+        datas: state.home.VoteHigh,
+      };
+    },
+    VoteHighSecond(state) {
+      return {
+        name: "Top Grossing Movies",
+        datas: state.home.VoteHighSecond,
+      };
+    },
+    getHomeTopRatedMovie(state) {
+      return {
+        name: "Top Rated Movies",
+        datas: state.home.topRated,
+      };
+    },
+    getHometopRatedTv(state) {
+      return {
+        name: "Top Rated TV Shows",
+        datas: state.home.topRatedTv,
+      };
     },
   },
 });

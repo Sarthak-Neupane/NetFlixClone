@@ -14,13 +14,14 @@
     ref="scene"
     @mouseover="mouseInside"
     @mouseleave="mouseOutside"
+    :style="{ width: posterSize + 'px', height: ((3/2)*posterSize) + 'px' }"
   >
     <div class="card">
       <div
         class="face front"
         :style="{
           'background-image':
-            'url(http://image.tmdb.org/t/p/w154' + poster + ')',
+            'url(http://image.tmdb.org/t/p/w' + posterSize + poster + ')',
         }"
       >
         <div class="datas" v-if="dimension">
@@ -261,10 +262,11 @@ export default {
       added: null,
     };
   },
-  props: ["poster", "id", "name", "genres", "allGenre"],
+  props: ["poster", "id", "name", "genres", "allGenre", "posterSize"],
   computed: {
     getPath() {
-      return this.$route.path + "/" + this.id;
+      return "/movie/" + this.id;
+      // return this.$route.path + "/" + this.id;
     },
     dimension() {
       if (window.innerWidth >= 1000) {
@@ -287,13 +289,15 @@ export default {
     },
     getGenres() {
       const displayGenre = [];
-      this.genres.forEach((value, index) => {
-        this.allGenre[0].forEach((item) => {
-          if (item.id === value && index <= 1) {
-            displayGenre.push(item.name);
-          }
+      if (this.genres && this.allGenre) {
+        this.genres.forEach((value, index) => {
+          this.allGenre[0].forEach((item) => {
+            if (item.id === value && index <= 1) {
+              displayGenre.push(item.name);
+            }
+          });
         });
-      });
+      }
       this.DisplayGenre = displayGenre;
       // console.log(this.DisplayGenre);
     },
@@ -364,8 +368,8 @@ export default {
   /* background: red;  */
 }
 .scene {
-  width: 154px;
-  height: 231px;
+  /* width: 154px;
+  height: 231px; */
   perspective: 30em;
 }
 

@@ -90,7 +90,7 @@ https://api.themoviedb.org/3/search/multi?api_key=600356b3ea6a55171e5421f900b63a
           }
         });
         this.data.sort((a, b) => {
-          if (a.popularity > b.popularity) {
+          if (a.vote_count > b.vote_count) {
             return -1;
           } else {
             return 1;
