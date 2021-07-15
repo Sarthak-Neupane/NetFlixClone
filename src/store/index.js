@@ -183,18 +183,18 @@ export default createStore({
     },
     async signUpAction({ commit }, payload) {
       commit("setError", null);
-      firebase
+      return firebase
         .auth()
         .createUserWithEmailAndPassword(payload.email, payload.password)
         .then(() => {
-          // localStorage.setItem("user", response);
+         //
         })
         .catch((error) => {
           console.log(error);
           commit("setError", error.message);
         });
     },
-    async signOutAction({ commit }) {
+     signOutAction({ commit }) {
       firebase
         .auth()
         .signOut()

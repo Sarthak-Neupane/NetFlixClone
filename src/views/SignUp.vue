@@ -136,7 +136,7 @@ export default {
         /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
       const passwordFormat =
-        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$@!%&*?])[A-Za-z\d#$@!%&*?]{8,30}$/;
 
       // if (strongRegex.test(this.password)) {
       //   this.$refs.password.classList.add("strong");
@@ -158,8 +158,7 @@ export default {
     async signUp() {
       await this.signUpAction({ email: this.email, password: this.password });
       this.error = this.$store.getters.getError;
-      console.log(this.error)
-      if (this.error === null) {
+      if (this.error !== null) {
         console.log(this.$store.getters.getError)
       } else {
         this.$router.replace({ name: "login" });
