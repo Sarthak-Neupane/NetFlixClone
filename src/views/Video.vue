@@ -3,7 +3,7 @@
     <div class="container">
       <h1>Get your Netflix Subscription mate</h1>
       <div class="video">
-        <video src="../assets/karlson.webm" :autoplay="play" controls loop></video>
+        <video src="../assets/karlson.webm" :autoplay="play" loop></video>
       </div>
       <h1>OR VIBE WITH ME !!!!</h1>
     </div>
@@ -47,7 +47,8 @@ section {
 
 .video {
   height: 50vh;
-  width: 30vw;
+  max-width: 30vw;
+  min-width: 20rem;
   background: yellow;
   margin: 1.5rem;
 }
@@ -61,5 +62,14 @@ video {
 h1:nth-of-type(2) {
   font-size: 6rem;
   text-align: center;
+}
+
+@media screen and (max-width: 768px){
+  h1:nth-of-type(2){
+    font-size: 3rem;
+  }
+   h1:nth-of-type(1){
+    font-size: 1rem;
+  }
 }
 </style>
