@@ -47,4 +47,9 @@ button {
   border-radius: 10px;
   cursor: pointer;
 }
+/* @media screen and (max-width: 768px){
+ button{
+   width: 150px;
+ }
+} */
 </style>

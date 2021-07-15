@@ -326,4 +326,17 @@ li {
 .marginAdding, .time {
   margin-right: 1rem;
 }
+
+@media screen and (max-width: 768px){
+  h1{
+    font-size: 2rem;
+  }
+  .desc{
+    font-size: .7rem;
+  }
+  img{
+    width: 100%;
+    height: 100%;
+  }
+}
 </style>

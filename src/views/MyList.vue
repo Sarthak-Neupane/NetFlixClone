@@ -93,4 +93,14 @@ export default {
   transform: translate(-50%, -50%);
   z-index: 999;
 }
+
+@media screen and (max-width: 768px) {
+  .list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin: 7rem 2rem;
+  }
+}
 </style>

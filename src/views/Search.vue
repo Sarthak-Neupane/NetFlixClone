@@ -177,4 +177,22 @@ form {
   justify-content: center;
   align-items: center;
 }
+
+@media screen and (max-width: 768px) {
+  .display{
+    max-width: 100%;
+
+  }
+      .input{
+      max-width: 20rem;
+    }
+
+    form{
+      flex-direction: column;
+    }
+
+    .search{
+      margin: 1rem 0;
+    }
+}
 </style>

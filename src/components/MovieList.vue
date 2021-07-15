@@ -197,6 +197,7 @@ export default {
           this.loading = true;
           await this.$store.dispatch("removeList", this.id);
           this.loading = false;
+          this.added = false
         } catch (error) {
           console.log(error.msg);
           this.loading = false;
@@ -214,10 +215,12 @@ export default {
             mediaType: "movie",
           });
           this.loading = false;
+          this.added = true
         } catch (error) {
           this.loading = false;
           console.log(error.msg);
           this.error = true;
+          this.added = false
           this.errorMessage = error.msg;
         }
       }
@@ -269,7 +272,7 @@ a {
 }
 
 .header {
-  min-height: 30px;
+  min-height: 80px;
   max-height: 80px;
   overflow: wrap;
   margin-bottom: .5rem;

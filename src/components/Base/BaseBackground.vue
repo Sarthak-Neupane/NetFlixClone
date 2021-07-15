@@ -103,4 +103,14 @@ export default {
 a {
   text-decoration: none;
 }
+
+@media screen and (max-width: 768px){
+  .textarea{
+    max-width: 100%;
+    min-width: 20rem;
+  }
+  .actions{
+    width: 100%;
+  }
+}
 </style>

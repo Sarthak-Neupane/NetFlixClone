@@ -292,6 +292,8 @@ h1 {
   transform: translateY(-10px);
   transition: opacity 1s ease-in;
   transition: transform 0.7s ease-in;
+  min-height: 140px;
+  /* background: red; */
 }
 
 ul {
