@@ -17,6 +17,7 @@ export default {
     ...mapActions(["authAction"]),
   },
   mounted() {
+    console.log(process.env.VUE_APP_API_KEY);
     this.authAction();
   },
   created() {},
