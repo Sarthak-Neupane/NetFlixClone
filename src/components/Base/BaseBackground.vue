@@ -64,6 +64,7 @@ section{
 
 ul{
   flex-wrap: wrap;
+  margin-top: 5rem;
 }
 
 .bg::after {
@@ -86,13 +87,15 @@ ul{
 
 .textarea {
   position: absolute;
-  top: 50%;
+  top: 0;
   left: 20%;
-  transform: translate(-20%, -50%);
+  transform: translate(-20%, 0);
   max-width: 100%;
   display: flex;
   justify-content: center;
   flex-direction: column;
+  /* max-height: 100%; */
+  margin-top: 10rem;
 }
 
 .header {

@@ -10,6 +10,7 @@ import MYLIST from "../views/MyList.vue";
 // import Video from "../views/Video.vue";
 import SignUp from "../views/SignUp.vue";
 import login from "../views/login.vue";
+import NotFound from "../views/NotFound.vue";
 
 // const MOVIES = defineAsyncComponent(() => import("../views/Movies.vue"));
 // const TvDetails = defineAsyncComponent(() => import("../views/TvDetails.vue"));
@@ -112,6 +113,14 @@ const routes = [
     component: login,
     meta: {
       hideNavbar: true,
+    },
+  },
+  {
+    path: "/:notFound(.*)",
+    name: "notFound",
+    component: NotFound,
+    meta: {
+      requiresAuth: true,
     },
   },
 ];
