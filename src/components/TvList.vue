@@ -345,6 +345,7 @@ export default {
           this.loading = true;
           await this.$store.dispatch("removeList", this.id);
           this.loading = false;
+          this.added = false;
         } catch (error) {
           console.log(error.msg);
           this.loading = false;
@@ -362,6 +363,7 @@ export default {
             mediaType: "tv",
           });
           this.loading = false;
+          this.added = true;
         } catch (error) {
           this.loading = false;
           console.log(error.msg);

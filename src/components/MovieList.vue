@@ -8,6 +8,15 @@
       </base-dialog>
     </div>
   </teleport>
+    <teleport to="body">
+    <div class="loader" v-if="error">
+      <base-dialog>
+        <template #header> Error Occured </template>
+        <template #body> {{ error }} </template>
+        <template #footer> </template>
+      </base-dialog>
+    </div>
+  </teleport>
   <!-- <router-link :to="getPath"> -->
   <div
     class="scene"
@@ -326,13 +335,11 @@ export default {
     async updateList() {
       if (this.added) {
         try {
-          console.log("adding");
           this.loading = true;
           await this.$store.dispatch("removeList", this.id);
           this.loading = false;
           this.added = false;
         } catch (error) {
-          console.log(error.msg);
           this.loading = false;
           this.error = true;
           this.errorMessage = error.msg;
@@ -351,9 +358,7 @@ export default {
           this.added = true;
         } catch (error) {
           this.loading = false;
-          console.log(error.msg);
           this.error = true;
-          this.added = false;
           this.errorMessage = error.msg;
         }
       }

@@ -68,9 +68,9 @@ export default createStore({
     setError(state, payload) {
       state.error = payload;
       if (payload !== null) {
-        console.log(payload);
+        // console.log(payload);
       } else {
-        console.log("error aayena");
+        // console.log("error aayena");
       }
     },
     // storeList(state, payload) {
@@ -78,6 +78,7 @@ export default createStore({
     // },
     storeData(state, payload) {
       state.stored = payload;
+      // console.log(state.stored)
     },
   },
   actions: {

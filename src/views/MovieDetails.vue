@@ -43,7 +43,7 @@ export default {
         }
       );
       const dataResponse = await response.json();
-      console.log(dataResponse)
+      // console.log(dataResponse)
       this.data = dataResponse;
       dataResponse.genres.forEach((element) => {
         this.genreName.push(element.name);

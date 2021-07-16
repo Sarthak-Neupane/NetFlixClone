@@ -137,7 +137,7 @@ export default {
       } else if (window.innerWidth < 1450) {
         return 5;
       } else if (window.innerWidth < 1900) {
-        return 7;
+        return 6;
       } else {
         return 9;
       }

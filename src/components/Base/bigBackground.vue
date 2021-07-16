@@ -171,12 +171,19 @@ export default {
         this.$refs.infoBtn.classList.remove("hovered");
       }
     },
+    async callFunction() {
+      this.loading = true;
+      await this.$store.dispatch("getList");
+      this.addedOrNot();
+      this.loading = false;
+    },
     addedOrNot() {
       const stored = this.$store.getters.getStoredMovies;
       console.log(stored);
       stored.forEach((element) => {
         if (element.id === this.id) {
           this.added = true;
+          console.log(this.added);
         }
       });
     },
@@ -192,6 +199,7 @@ export default {
         try {
           this.loading = true;
           await this.$store.dispatch("removeList", this.id);
+          this.added = false;
           this.loading = false;
         } catch (error) {
           console.log(error.msg);
@@ -210,6 +218,7 @@ export default {
             mediaType: this.type,
           });
           this.loading = false;
+          this.added = true;
         } catch (error) {
           this.loading = false;
           console.log(error.msg);
@@ -245,7 +254,8 @@ export default {
   created() {
     // console.log(typeof this.adult);
     // console.log(this.$route.path);
-    console.log(this.addedOrNot());
+    // console.log(this.addedOrNot());
+    this.callFunction();
   },
 };
 </script>
@@ -334,7 +344,7 @@ li {
   margin-right: 1rem;
 }
 
-.languages{
+.languages {
   margin: 1rem 0;
 }
 
