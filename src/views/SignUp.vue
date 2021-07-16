@@ -40,10 +40,21 @@
     <div class="container">
       <div class="form-contain">
         <div class="header">
-          <!-- <img src="../assets/netflix.jpg" /> -->
+          <svg
+            width="51"
+            height="112"
+            viewBox="0 0 51 112"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M50.6136 45.249C48.9792 44.4604 46.8852 44.0661 44.3316 44.0661C39.5817 44.0661 35.7206 46.0168 32.7482 49.9181C29.3875 54.2863 27.7123 60.5844 27.7123 68.8124C27.7123 75.2247 29.0402 80.4956 31.696 84.6044C34.3519 88.7133 37.835 90.7781 42.1456 90.7781C45.0874 90.7781 47.876 89.6367 50.5216 87.3644C50.2254 89.2736 49.7249 92.7806 49.0099 97.8959C48.5911 101.289 48.1927 104.827 47.8045 108.49C44.4746 110.492 40.2151 111.488 35.0158 111.488C25.5979 111.488 17.5487 106.539 10.8684 96.6404C3.62618 85.8599 0 71.8214 0 54.5249C0 38.5358 3.11544 25.6075 9.35659 15.7609C16.0063 5.26054 25.1995 0 36.9361 0C42.5746 0 46.6605 0.508427 49.1835 1.53563L50.6136 45.249Z"
+              fill="#9E0505"
+            />
+          </svg>
         </div>
 
-        <div class="title">Welcome</div>
+        <div class="title">Welcome To ChllFlix</div>
 
         <form @submit.prevent="validate">
           <div class="input1 inputs">
@@ -269,7 +280,7 @@ section {
   -webkit-box-pack: center;
   -ms-flex-pack: center;
   justify-content: center;
-  background-image: url("../assets/netflixLogo.png");
+  /* background-image: url("../assets/netflixLogo.png"); */
   background-size: 50%;
   background-position: 50% 50%;
   background-repeat: no-repeat;
@@ -391,5 +402,11 @@ section {
   position: absolute;
   top: 0;
   left: 0;
+}
+
+@media screen and (max-width: 768px){
+  .title{
+    font-size: 1.3rem;
+  }
 }
 </style>

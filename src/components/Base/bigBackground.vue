@@ -189,7 +189,7 @@ export default {
     },
     async updateList() {
       this.added = !this.added;
-      console.log(this.type)
+      console.log(this.type);
 
       if (!this.added) {
         try {
@@ -271,6 +271,7 @@ h1 {
 
 .desc {
   margin: 1rem 1rem;
+  overflow: wrap;
 }
 .green {
   background: green;
@@ -282,6 +283,7 @@ ul {
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 li {

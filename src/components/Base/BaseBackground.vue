@@ -1,4 +1,5 @@
 <template>
+<section>
   <div class="bg">
     <slot name="background"> </slot>
   </div>
@@ -41,6 +42,7 @@
       <slot name="tv"></slot>
     </div>
   </div>
+  </section>
 </template>
 
 <script>
@@ -50,10 +52,18 @@ export default {
 </script>
 
 <style scoped>
+section{
+  height: 100%;
+  width: 100%;
+}
 .bg {
   width: 100%;
-  height: 90vh;
+  height: 100vh;
   position: relative;
+}
+
+ul{
+  flex-wrap: wrap;
 }
 
 .bg::after {
@@ -70,8 +80,8 @@ export default {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  height: 50px;
-  overflow: hidden;
+  max-width: 100%;
+    flex-wrap: wrap;
 }
 
 .textarea {
@@ -79,7 +89,7 @@ export default {
   top: 50%;
   left: 20%;
   transform: translate(-20%, -50%);
-  max-width: 40rem;
+  max-width: 100%;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -113,8 +123,7 @@ a {
 
 @media screen and (max-width: 768px) {
   .textarea {
-    max-width: 100%;
-    min-width: 20rem;
+    /* max-width: 25rem; */
   }
   .actions {
     width: 100%;

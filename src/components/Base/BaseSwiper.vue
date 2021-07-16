@@ -24,7 +24,7 @@ p {
     text-align: center;
     margin-top: 3rem;
     font-weight: 500;
-    font-size: 2rem;
+    font-size: 1.2rem;
   }
 }
 </style>

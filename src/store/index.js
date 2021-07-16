@@ -330,26 +330,26 @@ export default createStore({
   getters: {
     getMoviesDiscover(state) {
       // return state.movies.discover;
-      return { name: "Discover", datas: state.movies.discover };
+      return { name: "Discover More on ChillFlix", datas: state.movies.discover };
     },
     getMoviesUpcoming(state) {
       // return state.movies.upcoming;
       return {
-        name: "Upcoming",
+        name: "Upcoming Movies on Chillflix",
         datas: state.movies.upcoming,
       };
     },
     getMoviesPopularity(state) {
       // return state.movies.popularity;
       return {
-        name: "Popular",
+        name: "Popular on Chillfilx",
         datas: state.movies.popularity,
       };
     },
     getMoviesToprated(state) {
       // return state.movies.topRated;
       return {
-        name: "Top Rated",
+        name: "Top Rated on Chillflix",
         datas: state.movies.topRated,
       };
     },
@@ -363,7 +363,7 @@ export default createStore({
     getMoviesTrending(state) {
       // return state.movies.trending;
       return {
-        name: "Trending",
+        name: "Trending on Chillflix",
         datas: state.movies.trending,
       };
     },
@@ -381,19 +381,19 @@ export default createStore({
     },
     getTvPopular(state) {
       return {
-        name: "Popular",
+        name: "Popular on Chillflix",
         datas: state.tv.popular,
       };
     },
     getTvTopRated(state) {
       return {
-        name: "Top Rated",
+        name: "Top Rated on Chillflix",
         datas: state.tv.topRated,
       };
     },
     getTvOriginal(state) {
       return {
-        name: "Orginals",
+        name: "Chillflix Orginals",
         datas: state.tv.originals,
       };
     },
@@ -414,25 +414,25 @@ export default createStore({
     },
     getHomeVoteHigh(state) {
       return {
-        name: "Originals",
+        name: "Chillflix Originals",
         datas: state.home.VoteHigh,
       };
     },
     VoteHighSecond(state) {
       return {
-        name: "Top Grossing Movies",
+        name: "Top Grossing Movies on Chillflix",
         datas: state.home.VoteHighSecond,
       };
     },
     getHomeTopRatedMovie(state) {
       return {
-        name: "Top Rated Movies",
+        name: "Top Rated Movies on Chillflix",
         datas: state.home.topRated,
       };
     },
     getHometopRatedTv(state) {
       return {
-        name: "Top Rated TV Shows",
+        name: "Top Rated TV Shows on Chillflix",
         datas: state.home.topRatedTv,
       };
     },
