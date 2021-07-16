@@ -11,6 +11,7 @@
       :time="data.runtime"
       :adult="data.adult"
       :poster="data.poster_path"
+      :spokenLang="spoken"
     >
     </big-background>
   </section>
@@ -25,6 +26,7 @@ export default {
       data: null,
       similar: null,
       genreName: [],
+      spoken: []
     };
   },
   methods: {
@@ -41,9 +43,13 @@ export default {
         }
       );
       const dataResponse = await response.json();
+      console.log(dataResponse)
       this.data = dataResponse;
       dataResponse.genres.forEach((element) => {
         this.genreName.push(element.name);
+      });
+      dataResponse.spoken_languages.forEach((element) => {
+        this.spoken.push(element.name);
       });
 
       this.isLoading = false;

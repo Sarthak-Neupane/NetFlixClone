@@ -34,6 +34,9 @@
         <slot name="info"> </slot>
       </base-button>
     </div>
+    <div class="languages">
+      <slot name="lang"></slot>
+    </div>
     <div class="forTv">
       <slot name="tv"></slot>
     </div>
@@ -100,16 +103,20 @@ export default {
   margin: 1.5rem 0rem;
 }
 
+.languages{
+  margin: 1rem 0;
+}
+
 a {
   text-decoration: none;
 }
 
-@media screen and (max-width: 768px){
-  .textarea{
+@media screen and (max-width: 768px) {
+  .textarea {
     max-width: 100%;
     min-width: 20rem;
   }
-  .actions{
+  .actions {
     width: 100%;
   }
 }

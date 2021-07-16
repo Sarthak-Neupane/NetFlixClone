@@ -12,6 +12,7 @@
       :adult="data.adult"
       :seasons="data.number_of_seasons"
       :episodes="data.number_of_episodes"
+      :spokenLang="spoken"
     >
     </big-background>
   </section>
@@ -26,6 +27,7 @@ export default {
       data: null,
       similar: null,
       genreName: [],
+      spoken: [],
     };
   },
   methods: {
@@ -45,6 +47,9 @@ export default {
       this.data = dataResponse;
       dataResponse.genres.forEach((element) => {
         this.genreName.push(element.name);
+      });
+      dataResponse.spoken_languages.forEach((element) => {
+        this.spoken.push(element.name);
       });
       console.log(this.data);
       // console.log(this.genreName);

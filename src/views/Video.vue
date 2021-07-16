@@ -3,7 +3,7 @@
     <div class="container">
       <h1>Get your Netflix Subscription mate</h1>
       <div class="video">
-        <video src="../assets/karlson.webm" :autoplay="play" loop></video>
+        <video src="../assets/karlson.webm" autoplay loop></video>
       </div>
       <h1>OR VIBE WITH ME !!!!</h1>
     </div>
@@ -14,16 +14,16 @@
 export default {
   data() {
     return {
-      play: false,
+      // play: false,
     };
   },
   created() {
-    this.playVid();
+    // this.playVid();
   },
   methods: {
-    playVid() {
-      this.play = true;
-    },
+    // playVid() {
+    //   this.play = true;
+    // },
   },
 };
 </script>

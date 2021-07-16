@@ -135,8 +135,8 @@ export default {
       const mailFormat =
         /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
-      const passwordFormat =
-        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$@!%&*?])[A-Za-z\d#$@!%&*?]{8,30}$/;
+      // const passwordFormat =
+      //   /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$@!%&*?])[A-Za-z\d#$@!%&*?]{8,30}$/;
 
       // if (strongRegex.test(this.password)) {
       //   this.$refs.password.classList.add("strong");
@@ -148,10 +148,14 @@ export default {
         this.error = "Please Fill All the details!!";
       } else if (mailFormat.exec(this.email) == null) {
         this.error = "Must be a Valid Email";
-      } else if (passwordFormat.exec(this.password) == null) {
-        this.error =
-          "Password Must be 8 characters long and contaian atleast a special character, a number , an UpperCase letter and a LowerCase letter";
-      } else {
+      } else if (this.password <= 7) {
+        this.error = "Password must be 7 Characters long";
+      }
+      // else if (passwordFormat.exec(this.password) == null) {
+      //   this.error =
+      //     "Password Must be 8 characters long and contaian atleast a special character, a number , an UpperCase letter and a LowerCase letter";
+      // }
+      else {
         this.signUp();
       }
     },
@@ -159,7 +163,7 @@ export default {
       await this.signUpAction({ email: this.email, password: this.password });
       this.error = this.$store.getters.getError;
       if (this.error !== null) {
-        console.log(this.$store.getters.getError)
+        console.log(this.$store.getters.getError);
       } else {
         this.$router.replace({ name: "login" });
       }

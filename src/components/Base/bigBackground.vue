@@ -121,6 +121,10 @@
         <p class="textButton" v-if="added">Added</p>
       </button>
     </template>
+    <template class="forLanguage" #lang v-if="pathTV || pathMovie">
+      Spoken Languages:
+      <span v-for="language in spokenLang" :key="language">{{ language }}</span>
+    </template>
     <template class="forTv" #tv v-if="pathTV">
       <p>No. of Seasons: {{ seasons }}</p>
       <p>No. of Episodes: {{ episodes }}</p>
@@ -142,6 +146,7 @@ export default {
     "seasons",
     "episodes",
     "poster",
+    "spokenLang",
   ],
   data() {
     return {
@@ -168,7 +173,7 @@ export default {
     },
     addedOrNot() {
       const stored = this.$store.getters.getStoredMovies;
-      console.log(stored)
+      console.log(stored);
       stored.forEach((element) => {
         if (element.id === this.id) {
           this.added = true;
@@ -324,18 +329,30 @@ li {
   transform: translate(-50%, -50%);
 }
 
-.marginAdding, .time {
+.marginAdding,
+.time {
   margin-right: 1rem;
 }
 
-@media screen and (max-width: 768px){
-  h1{
+.languages{
+  margin: 1rem 0;
+}
+
+.languages span {
+  background: red;
+  margin: 0rem 1rem;
+  padding: 0.2rem 0.4rem;
+  border-radius: 20px;
+}
+
+@media screen and (max-width: 768px) {
+  h1 {
     font-size: 2rem;
   }
-  .desc{
-    font-size: .7rem;
+  .desc {
+    font-size: 0.7rem;
   }
-  img{
+  img {
     width: 100%;
     height: 100%;
   }

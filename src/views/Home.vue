@@ -11,7 +11,7 @@
     >
     </big-background>
 
-    <div class="theList">
+    <div class="theList" v-if="getStoredMovies">
       <base-swiper>
         <template #title>My List</template>
         <template #swiper>

@@ -179,6 +179,10 @@ a {
   font-size: 500;
 }
 
+a.router-link-active{
+  color: red;
+}
+
 a:hover {
   color: rgb(197, 197, 197);
 }

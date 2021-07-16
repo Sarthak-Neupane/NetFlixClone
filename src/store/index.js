@@ -380,7 +380,7 @@ export default createStore({
     },
     getTvPopular(state) {
       return {
-        name: "Popular on ChillFlix",
+        name: "Popular",
         datas: state.tv.popular,
       };
     },
@@ -392,7 +392,7 @@ export default createStore({
     },
     getTvOriginal(state) {
       return {
-        name: "ChillFlix Orginals",
+        name: "Orginals",
         datas: state.tv.originals,
       };
     },
@@ -413,7 +413,7 @@ export default createStore({
     },
     getHomeVoteHigh(state) {
       return {
-        name: "ChillFlix Originals",
+        name: "Originals",
         datas: state.home.VoteHigh,
       };
     },
