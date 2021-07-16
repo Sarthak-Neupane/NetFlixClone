@@ -147,11 +147,11 @@ export default {
     "episodes",
     "poster",
     "spokenLang",
+    "type",
   ],
   data() {
     return {
       color: "#ffffff",
-      type: null,
       added: null,
       error: null,
       show: false,
@@ -189,11 +189,7 @@ export default {
     },
     async updateList() {
       this.added = !this.added;
-      if (this.seasons) {
-        this.type = "tv";
-      } else {
-        this.type = "movie";
-      }
+      console.log(this.type)
 
       if (!this.added) {
         try {

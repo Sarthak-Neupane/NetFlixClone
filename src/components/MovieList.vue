@@ -8,7 +8,7 @@
       </base-dialog>
     </div>
   </teleport>
-    <teleport to="body">
+  <teleport to="body">
     <div class="loader" v-if="error">
       <base-dialog>
         <template #header> Error Occured </template>
@@ -23,7 +23,7 @@
     ref="scene"
     @mouseover="mouseInside"
     @mouseleave="mouseOutside"
-    :style="{ width: posterSize + 'px', height: ((3/2)*posterSize) + 'px' }"
+    :style="{ width: posterSize + 'px', height: (3 / 2) * posterSize + 'px' }"
   >
     <div class="card">
       <div
@@ -271,11 +271,14 @@ export default {
       added: null,
     };
   },
-  props: ["poster", "id", "name", "genres", "allGenre", "posterSize"],
+  props: ["poster", "id", "name", "genres", "allGenre", "posterSize", "type"],
   computed: {
     getPath() {
-      return "/movie/" + this.id;
-      // return this.$route.path + "/" + this.id;
+        if (this.type) {
+          return `/${this.type}/` + this.id;
+        } else {
+          return "/movie/" + this.id;
+        }
     },
     dimension() {
       if (window.innerWidth >= 1000) {
@@ -288,6 +291,8 @@ export default {
   created() {
     this.addedOrNot();
     this.getGenres();
+    // console.log(this.$route.path);
+    // console.log(this.type)
   },
   methods: {
     mouseInside() {

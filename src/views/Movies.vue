@@ -8,6 +8,7 @@
       :title="discover.datas[getRandom].title"
       :desc="discover.datas[getRandom].overview"
       :id="discover.datas[getRandom].id"
+      :type="theType"
     >
     </big-background>
     <div class="container">
@@ -146,6 +147,9 @@ export default {
     getRandom() {
       return Math.floor(Math.random() * this.discover.datas.length);
     },
+    theType(){
+      return 'movie'
+    }
   },
 };
 </script>

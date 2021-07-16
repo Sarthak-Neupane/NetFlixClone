@@ -10,6 +10,8 @@
       :title="popular.datas[getRandom].name"
       :desc="popular.datas[getRandom].overview"
       :id="popular.datas[getRandom].id"
+      :type="theType"
+      :poster="popular.datas[getRandom].poster_path"
     >
     </big-background>
     <div class="container">
@@ -110,6 +112,7 @@ export default {
   created() {
     this.getData();
     this.getGenres();
+    console.log(this.popular)
   },
   computed: {
     dimensions() {
@@ -146,6 +149,9 @@ export default {
     getRandom() {
       return Math.floor(Math.random() * this.popular.datas.length);
     },
+    theType(){
+      return 'tv'
+    }
   },
 };
 </script>

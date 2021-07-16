@@ -27,6 +27,7 @@
                 :id="movie.id"
                 :name="movie.title"
                 :posterSize="185"
+                :type="movie.mediaType"
               ></movie-list>
             </swiper-slide>
           </swiper>
@@ -121,6 +122,7 @@ export default {
       return this.$store.getters.getHometopRatedTv;
     },
     getStoredMovies() {
+      console.log(this.$store.getters.getStoredMovies)
       return this.$store.getters.getStoredMovies;
     },
     hasMovies() {
