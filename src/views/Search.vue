@@ -62,6 +62,7 @@ export default {
   },
   methods: {
     async getData() {
+      this.$refs.input.value = ''
       this.empty = false;
       this.data = [];
       this.isLoading = true;

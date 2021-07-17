@@ -8,6 +8,7 @@
       :title="getVoteHigh.datas[getRandom].title"
       :desc="getVoteHigh.datas[getRandom].overview"
       :id="getVoteHigh.datas[getRandom].id"
+      type="movie"
     >
     </big-background>
 
