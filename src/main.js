@@ -25,17 +25,6 @@ const firebaseConfig = {
   messagingSenderId: process.env.VUE_APP_MESSAGING_SENDER_ID,
   appId: process.env.VUE_APP_APP_ID,
 };
-
-// const firebaseConfig = {
-//   apiKey: "AIzaSyC82icMDSAeleMuNh3oJs-rH0dRDUb55JQ",
-//   authDomain: "netflixclonefirst.firebaseapp.com",
-//   databaseURL: "https://netflixclonefirst-default-rtdb.firebaseio.com",
-//   projectId: "netflixclonefirst",
-//   storageBucket: "netflixclonefirst.appspot.com",
-//   messagingSenderId: "865188090238",
-//   appId: "1:865188090238:web:c697bc7b0ef74c4c01e32f",
-// };
-
 firebase.initializeApp(firebaseConfig);
 
 const app = createApp(App);
