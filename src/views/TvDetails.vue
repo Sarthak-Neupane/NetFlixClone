@@ -9,10 +9,12 @@
       :genres="genreName"
       :releaseDate="data.release_date"
       :time="data.runtime"
+      :poster="data.poster_path"
       :adult="data.adult"
       :seasons="data.number_of_seasons"
       :episodes="data.number_of_episodes"
       :spokenLang="spoken"
+      type="tv"
     >
     </big-background>
   </section>
@@ -51,8 +53,8 @@ export default {
       dataResponse.spoken_languages.forEach((element) => {
         this.spoken.push(element.name);
       });
-      console.log(this.data);
-      // console.log(this.genreName);
+      // console.log(this.data);
+      console.log(this.genreName);
     },
 
     async getSimilar() {

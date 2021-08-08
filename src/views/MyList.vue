@@ -70,6 +70,7 @@ export default {
         console.log(this.data);
         this.loading = false;
       } else {
+        console.log('false')
         this.loading = false;
         this.empty = true;
       }

@@ -12,6 +12,7 @@
       :adult="data.adult"
       :poster="data.poster_path"
       :spokenLang="spoken"
+      type="movie"
     >
     </big-background>
   </section>
